@@ -44,6 +44,8 @@ def load_data(filename):
             period_b_uncertainty, 
             statistics.stdev(periods) / len(periods) ** 0.5
         ))
+        print(period_b_uncertainty, 
+            statistics.stdev(periods) / len(periods) ** 0.5)
     print(period_error)
     return np.array(amplitudes), np.array(mean_periods), np.array(amplitude_error), np.array(period_error)
 
@@ -118,10 +120,12 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     fig.tight_layout()
     # Does a decent cropping job of the two figures.
     
+    fig.savefig("graph.png")
+    
     plt.show()
     # Show the graph on your screen.
 
-    fig.savefig("graph.png")
+    
     # This saves the graph as a file, which will get overwritten
     # every time you run this program, so rename the file if you
     # want to keep multiple files!
