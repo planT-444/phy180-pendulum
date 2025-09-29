@@ -38,9 +38,7 @@ Before you write any paper ever, you need to understand who your target audience
 \section{Methods and Procedures}
 The string was tied around a screw, which was inserted into the mass (tennis ball). Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 
-\subsection{Period vs. Initial Amplitude}
-
-
+\subsection{Measuring Period vs. Initial Amplitude}
 
 The period was measured with 3 oscillations per trial to reduce type B uncertainty using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker. A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings. See Figure~\ref{fig:setup1}.
 
@@ -63,10 +61,17 @@ The period was measured with 3 oscillations per trial to reduce type B uncertain
 \end{figure}
 
 \subsection{Measuring Q Factor}
-As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane. See Figure~\ref{fig:setup2}. The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude per oscillation was now measured using OSP Tracker (manual tracking). 
+Footage was collected starting at $\theta_0 \approx \pi/6$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane. See Figure~\ref{fig:setup2}. The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured using OSP Tracker (manual tracking). 
 
 \section{Results and Data Analysis}
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=0.4\textheight]{output-files/period vs amplitude.png}
+    \caption{
+        Graph of $T$ vs. $\theta_0$ fitted to 3-term power series $T(\theta) = T_0(1 + B\theta + C\theta^2)$ (Wilson). 
+    }
+    \label{fig:period vs amplitude}
+\end{figure}
 Sometimes this is two different sections. However, this experiment has enough parts that I would combine them. This part might want subsections for each of the 4 topics (basically each graph could have its own subsection). Depending on how clear you write, subsections may not be necessary.
 
 This section is about presenting your raw data, interpreting it properly for the reader, and discussing your uncertainties. You will want to graph your data (no tables of data please!) with the line of best fit. You will want to explicitly describe the line of best fit (probably by referencing one of the equations from your introduction) and any other important features of the graph (slope, intercepts, whatever is important). Make concrete what the data and graph should tell the reader. All the important results that you included in your introduction and conclusion need to be explicitly explained here. Your analysis should reference every graph. For example: ``In Figure \ref{fig:FallingRock} we see that the position of a falling rock in the asteroid is well-fit by a quadratic function. This indicates that the acceleration due to gravity is approximately a constant.''
