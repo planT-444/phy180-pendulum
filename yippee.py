@@ -54,7 +54,7 @@ def load_period_vs_amplitude(filename):
 def load_exponential_amplitude(filename):
     times, amplitudes = np.genfromtxt(filename, usecols=(0,1), skip_header=1, unpack = True, delimiter = ',')
     time_error = np.array([1/120] * len(times))
-    amplitude_error = np.array([np.deg2rad(0.5)] * len(amplitudes))
+    amplitude_error = np.array([np.deg2rad(0.3)] * len(amplitudes))
     return times, amplitudes, time_error, amplitude_error
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=14,
@@ -72,10 +72,6 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
 
     puncert = np.sqrt(np.diagonal(pcov))
     # The uncertainties are the square roots of the diagonal of the covariance matrix
-    
-    print("Best fit parameters, with uncertainties, but not rounded off properly:")
-    for i in range(len(popt)):
-        print(popt[i], "+/-", puncert[i])
     
     start = min(xdata)
     stop = max(xdata)    
@@ -127,10 +123,13 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     # Does a decent cropping job of the two figures.
     
     output_dir = Path(__file__).parent / "output-files"
-
-    fig.savefig(output_dir / output_filename)
     
-    plt.show()
+    with open(output_dir / (output_filename + ".txt"), 'w') as f:
+        f.write("Best fit parameters, with uncertainties, but not rounded off properly:\n")
+        for i in range(len(popt)):
+            f.write(f"{popt[i]} +/- {puncert[i]}\n")
+    
+    fig.savefig(output_dir / (output_filename + ".png"))
     # Show the graph on your screen.
 
     
@@ -153,8 +152,8 @@ if __name__ == '__main__':
              *load_period_vs_amplitude(input_dir / "PHY180 Pendulum - Sheet2.csv"),
              xlabel="Initial Amplitude (rad)",
              ylabel="Period (s)",
-             output_filename = "period vs amplitude.png")
+             output_filename = "period vs amplitude")
     plot_fit(exponential, *load_exponential_amplitude(input_dir / "PHY180 Pendulum - Sheet4.csv"),
              xlabel="Time (s)",
              ylabel="Amplitude (rad)",
-             output_filename = "amplitude vs. time.png")
+             output_filename = "amplitude vs. time")

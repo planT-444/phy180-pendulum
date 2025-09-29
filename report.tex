@@ -1,7 +1,9 @@
 \documentclass[12pt]{article}
 \usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
 \usepackage{float}
-%\usepackage{wrapfig}
+\usepackage{amsmath}
 \setlength{\textwidth}{6.5in}
 \setlength{\textheight}{9.9in}
 \setlength{\oddsidemargin}{0.0in}
@@ -13,6 +15,8 @@
 \pagestyle{empty}
 
 \newcommand{\e}{\mathrm{e}}
+
+
 
 \begin{document}
 \begin{center}
@@ -32,21 +36,34 @@ The rest of your introduction should include an overview of what you did at a hi
 Before you write any paper ever, you need to understand who your target audience is. For this paper, pretend your target audience is a high school physics student. Obviously, your real target audience is the grader, but they will be grading your paper as if they were a high school physics student. This is important as it sets what assumptions you can make about what is common knowledge and what should be assumed to be new to the reader.
 
 \section{Methods and Procedures}
-The string was tied around a screw, which was inserted into the mass (tennis ball).
-Two wooden boards clamped the string near their ends, using friction to fix the pendulum's centre of rotation. 
-The boards jutted off the edge of a table, allowing the pendulum to swing freely.
-A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
+The string was tied around a screw, which was inserted into the mass (tennis ball). Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 
-\subsection{Angle vs. Period}
-The period was measured using slow-motion footage (120 FPS) and 3 oscillations per trial to 
-reduce type B uncertainty. A protractor taped to the end of the boards measured initial amplitudes.
-When dropping the mass, it was also ensured from the side that the pendulum 
+\subsection{Period vs. Initial Amplitude}
 
-This is where you discuss any important details about what you did and how you did it, including justifications for any choices you made. Did you use nylon fishing line for the pendulum because it doesn't stretch much? Great, describe that briefly here. Anything that you did specifically to reduce your uncertainties is very valuable information to include here! 
 
-The goal is that if the target audience reads {\bf only this paper} and nothing else (especially not the instructions file you got) they should nonetheless be able to reproduce your experiment and get similar results. Your target audience (high school physics students) presumably knows how to measure lengths and times, so don't include detailed notes on how to use a ruler. That is irrelevant. But if you did something to prevent your pendulum from oscillating in elliptical (3d) motion, rather than planar (2D) motion, that would be useful to document.
 
-You can, and in some cases should, allude to future results in this section if they affect choices you made. For example, if you decide to always release your pendulum from an angle of 10 degrees after doing the Period vs. Angle part of the experiment, describe that here even though you have not presented those results yet.
+The period was measured with 3 oscillations per trial to reduce type B uncertainty using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker. A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings. See Figure~\ref{fig:setup1}.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.2\textheight]{input-files/setup1.jpg}
+        \caption{Setup for Period vs. Initial Amplitude experiment}
+        \label{fig:setup1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.2\textheight]{input-files/setup2.jpg}
+        \caption{Setup for Amplitude vs. Time}
+        \label{fig:setup2}
+    \end{minipage}
+
+\end{figure}
+
+\subsection{Measuring Q Factor}
+As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane. See Figure~\ref{fig:setup2}. The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude per oscillation was now measured using OSP Tracker (manual tracking). 
 
 \section{Results and Data Analysis}
 
@@ -56,7 +73,7 @@ This section is about presenting your raw data, interpreting it properly for the
 
 \begin{figure}[h!]
 \begin{centering}
-\includegraphics[width=0.6 \textwidth]{graph.png}
+% \includegraphics[width=0.6 \textwidth]{graph.png}
 \label{fig:FallingRock}
 \caption{Time series data of the height of a rock falling near the surface of an asteroid. Best fit line is a quadratic corresponding to an acceleration of $1.4 \pm 0.2~ \mathrm{m/s^2}$. Note how the title is not simply `Height-Time graph', which is information already present. If your errorbars are too small to be seen, specificaly state that in this caption. You should aim for your captions to explain a lot. Ideally, if a reader only reads your first paragraph of your introduction plus the captions of your graph they should understand about half of your paper!}
 \end{centering}
@@ -76,6 +93,8 @@ Repeat all your judgment calls. Is period independent of angle? Does the amplitu
 You should also discuss what the largest uncertainty sources were, and mention how they could be decreased `in the future'. 
 
 \appendix
+
+% TODO: CITE OSP TRACKER
 
 \section{Notes on TeX}
 
