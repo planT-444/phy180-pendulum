@@ -1,9 +1,11 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[labelfont=bf]{caption}
 \setlength{\textwidth}{6.5in}
 \setlength{\textheight}{9.9in}
 \setlength{\oddsidemargin}{0.0in}
@@ -25,21 +27,11 @@ PHY180 Pendulum Project \\ Lab 1: Period vs. Angle and Q factor
 }
 \end{center}
 
-\section{Introduction}
-
-This document describes, briefly, how you should format a paper. The Appendix has some notes on how to use TeX. Most physicists use TeX or one of its variants (like LaTeX) to write papers because it does an excellent job of typesetting equations.
-
-Your introduction should start with a brief summary of your entire report. What are your 1 to 4 most important results? Put them here. Once the reader has read the first paragraph, they should already know whether they want to read the rest of your paper. I recommend writing this summary last, after the conclusion. You really want the first paragraph of your introduction to be very similar to your conclusion.
-
-The rest of your introduction should include an overview of what you did at a high level (you built a pendulum, but don't include details like what materials you used here) and include any theory that is relevant. The introduction is the primary location for introducing new equations. It's not great style to introduce new physics equations in any of the subsequent sections.
-
-Before you write any paper ever, you need to understand who your target audience is. For this paper, pretend your target audience is a high school physics student. Obviously, your real target audience is the grader, but they will be grading your paper as if they were a high school physics student. This is important as it sets what assumptions you can make about what is common knowledge and what should be assumed to be new to the reader.
-
 \section{Methods and Procedures}
+% TODO: string type?
 The string was tied around a screw, which was inserted into the mass (tennis ball). Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 
 \subsection{Measuring Period vs. Initial Amplitude}
-
 The period was measured with 3 oscillations per trial to reduce type B uncertainty using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker. A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings. See Figure~\ref{fig:setup1}.
 
 \begin{figure}[h]
@@ -47,14 +39,14 @@ The period was measured with 3 oscillations per trial to reduce type B uncertain
     \begin{minipage}[t]{0.45\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup1.jpg}
-        \caption{Setup for Period vs. Initial Amplitude experiment}
+        \caption{Setup for Period vs. Initial Amplitude Experiment}
         \label{fig:setup1}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup2.jpg}
-        \caption{Setup for Amplitude vs. Time}
+        \caption{Setup for Amplitude vs. Time (Q Factor Experiment)}
         \label{fig:setup2}
     \end{minipage}
 
@@ -64,14 +56,63 @@ The period was measured with 3 oscillations per trial to reduce type B uncertain
 Footage was collected starting at $\theta_0 \approx \pi/6$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane. See Figure~\ref{fig:setup2}. The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured using OSP Tracker (manual tracking). 
 
 \section{Results and Data Analysis}
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[height=0.4\textheight]{output-files/period vs amplitude.png}
     \caption{
-        Graph of $T$ vs. $\theta_0$ fitted to 3-term power series $T(\theta) = T_0(1 + B\theta + C\theta^2)$ (Wilson). 
-    }
+        Graph of period vs. initial amplitude at release fitted to 3-term power series 
+        $T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$ (Wilson, 2025). 
+        Amplitude error bars are too small to be visible.}
     \label{fig:period vs amplitude}
 \end{figure}
+The data fits the power series with values ($B,~ C=0$ predicted (Wilson)):
+\begin{align*}
+T_0&=1.528 \pm \SI{0.002}{s}, \\
+B&=-0.0006 \pm \SI{0.0005}{s}, \\
+C&=0.0563 \pm \SI{0.0006}{s}.
+\end{align*}
+As expected, $|B - u(B)| < 2u(B)$ and $B \approx 0$ experimentally, implying a symmetrical pendulum since
+$T(\theta)=T(1+C\theta_0^2)$ is an even function.
+
+However, contrary to prediction, $C \neq 0$ experimentally (considering error $C \gg u(C)$, C cannot plausibly considered 0). Indeed, $T(\theta_0)$ grows non-negligibly for larger $|\theta_0|$.
+
+The error for the measured variables:
+\begin{alignat*}{2}
+    u(\theta_0)&=\SI{0.5}{\degree}=\SI{0.009}{rad} 
+        &\quad& \text{(protractor)} \\
+    u(T)&=\max(u_A(T), u_B(t)) 
+        &\quad& \left(\frac{\sigma}{\sqrt{N}}, ~ u(\text{footage})\right) \\
+    &=\max(u_A(T), \SI{0.003}{s}) 
+        &\quad& (1/\SI{120}{FPS}/\SI{3}{oscillations})
+\end{alignat*}
+For small $\theta_0$, $u(T)=\SI{0.003}{s}$.
+To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), it must be determined when discrepancy $T-T_0=T_0C\theta_0^2 \leq u(T)$. \\
+\begin{center}
+    \begin{math}
+        |\theta_0|\leq \sqrt{\frac{u(T)}{T_0 C}}
+            \pm \sqrt{
+                    \max(
+                        \frac{u(T_0)}{T_0},~ 
+                        \frac{u(C)}{{C}}
+                    )
+                }
+                \sqrt{\frac{u(T)}{T_0 C}}=0.18 \pm 0.02
+    \end{math}
+\end{center}
+Therefore, the small angle approximation is valid for $|\theta_0|\leq 0.20$. By the error bars in Figure~\ref{fig:period vs amplitude}, $u(T)=\SI{0.003}{s}$ is valid for $|\theta_0|\leq 0.20~ (u_A(T) < u_B(T))$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.4\textheight]{output-files/amplitude vs. time.png}
+    \caption{
+        Graph of $\theta$ at peak of oscillation vs. $t$ fitted to the exponential
+        $\theta(t) = \theta_0 \e ^ {t/\tau}$ (Wilson, 2025). 
+        Time error bars are too small to be visible.
+    }
+    \label{fig:amplitude vs. time}
+\end{figure}
+
+
 Sometimes this is two different sections. However, this experiment has enough parts that I would combine them. This part might want subsections for each of the 4 topics (basically each graph could have its own subsection). Depending on how clear you write, subsections may not be necessary.
 
 This section is about presenting your raw data, interpreting it properly for the reader, and discussing your uncertainties. You will want to graph your data (no tables of data please!) with the line of best fit. You will want to explicitly describe the line of best fit (probably by referencing one of the equations from your introduction) and any other important features of the graph (slope, intercepts, whatever is important). Make concrete what the data and graph should tell the reader. All the important results that you included in your introduction and conclusion need to be explicitly explained here. Your analysis should reference every graph. For example: ``In Figure \ref{fig:FallingRock} we see that the position of a falling rock in the asteroid is well-fit by a quadratic function. This indicates that the acceleration due to gravity is approximately a constant.''
