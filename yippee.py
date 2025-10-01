@@ -54,7 +54,7 @@ def load_period_vs_amplitude(filename):
 def load_exponential_amplitude(filename):
     times, amplitudes = np.genfromtxt(filename, usecols=(0,1), skip_header=1, unpack = True, delimiter = ',')
     time_error = np.array([1/120] * len(times))
-    amplitude_error = np.array([np.deg2rad(0.3)] * len(amplitudes))
+    amplitude_error = np.array([np.deg2rad(0.2)] * len(amplitudes))
     return times, amplitudes, time_error, amplitude_error
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=14,

@@ -4,6 +4,7 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{commath}
 \usepackage{siunitx}
 \usepackage[labelfont=bf]{caption}
 \setlength{\textwidth}{6.5in}
@@ -30,9 +31,9 @@ PHY180 Pendulum Project \\ Lab 1: Period vs. Angle and Q factor
 \section{Methods and Procedures}
 % TODO: string type?
 The string was tied around a screw, which was inserted into the mass (tennis ball). Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
-
+% TODO: talk about Q
 \subsection{Measuring Period vs. Initial Amplitude}
-The period was measured with 3 oscillations per trial to reduce type B uncertainty using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker. A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings. See Figure~\ref{fig:setup1}.
+The period was measured with 3 oscillations per trial to reduce type B uncertainty using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker. A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}). 
 
 \begin{figure}[h]
     \centering
@@ -53,7 +54,10 @@ The period was measured with 3 oscillations per trial to reduce type B uncertain
 \end{figure}
 
 \subsection{Measuring Q Factor}
-Footage was collected starting at $\theta_0 \approx \pi/6$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane. See Figure~\ref{fig:setup2}. The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured using OSP Tracker (manual tracking). 
+Footage was collected starting at $\theta_0 \approx 0.26$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor (manual tracking).
+In addition to analyzing the overall decay to calculuate $Q$, $Q/n$, the number of oscillations (henceforth referred to as $K$) for the pendulum to decay by a factor of $\e ^ {-\pi/n}$, must be counted. 
+$Q=nK,$ so $u(Q)=nu(K)$. Smaller $n$ result in a larger number of oscillations for which $\theta\approx\theta_{final}$ experimentally \mbox{$(\,\abs{\theta_{final}-\theta} \leq 2u(\theta))$}, increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected, and the one with lower $u(Q)$ was used.
+
 
 \section{Results and Data Analysis}
 \begin{figure}[H]
@@ -62,7 +66,8 @@ Footage was collected starting at $\theta_0 \approx \pi/6$. As the pendulum coul
     \caption{
         Graph of period vs. initial amplitude at release fitted to 3-term power series 
         $T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$ (Wilson, 2025). 
-        Amplitude error bars are too small to be visible.}
+        Amplitude error bars are too small to be visible.
+        The large outlier at $\theta_0=0.873$ was a result of a misdrop but was not artificially discluded.}
     \label{fig:period vs amplitude}
 \end{figure}
 The data fits the power series with values ($B,~ C=0$ predicted (Wilson)):
@@ -71,10 +76,10 @@ T_0&=1.528 \pm \SI{0.002}{s}, \\
 B&=-0.0006 \pm \SI{0.0005}{s}, \\
 C&=0.0563 \pm \SI{0.0006}{s}.
 \end{align*}
-As expected, $|B - u(B)| < 2u(B)$ and $B \approx 0$ experimentally, implying a symmetrical pendulum since
-$T(\theta)=T(1+C\theta_0^2)$ is an even function.
+As expected, $\abs{B - u(B)} < 2u(B)$ and $B \approx 0$ experimentally, implying a symmetrical pendulum since
+$T(\theta)=T(1+C\theta_0^2)$ is an even function (visually, Figure \ref{fig:period vs amplitude} confirms this).
 
-However, contrary to prediction, $C \neq 0$ experimentally (considering error $C \gg u(C)$, C cannot plausibly considered 0). Indeed, $T(\theta_0)$ grows non-negligibly for larger $|\theta_0|$.
+However, contrary to prediction, $C \neq 0$ experimentally (considering error $C \gg u(C)$, $C$ cannot plausibly considered 0). Indeed, $T(\theta_0)$ grows non-negligibly for larger $\abs{\theta_0}$.
 
 The error for the measured variables:
 \begin{alignat*}{2}
@@ -86,20 +91,21 @@ The error for the measured variables:
         &\quad& (1/\SI{120}{FPS}/\SI{3}{oscillations})
 \end{alignat*}
 For small $\theta_0$, $u(T)=\SI{0.003}{s}$.
-To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), it must be determined when discrepancy $T-T_0=T_0C\theta_0^2 \leq u(T)$. \\
+To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), it must be determined when discrepancy $T-T_0=T_0C\theta_0^2 \leq 2u(T)$ 
+(at the highest, their error bars can overlap at $T_0 + u(T)=T-u(T))$. \\
 \begin{center}
     \begin{math}
-        |\theta_0|\leq \sqrt{\frac{u(T)}{T_0 C}}
+        \abs{\theta_0} \leq \sqrt{\frac{u(T)}{T_0 C}}
             \pm \sqrt{
                     \max(
                         \frac{u(T_0)}{T_0},~ 
                         \frac{u(C)}{{C}}
                     )
                 }
-                \sqrt{\frac{u(T)}{T_0 C}}=0.18 \pm 0.02
+                \sqrt{\frac{u(T)}{T_0 C}}=0.25 \pm 0.03
     \end{math}
 \end{center}
-Therefore, the small angle approximation is valid for $|\theta_0|\leq 0.20$. By the error bars in Figure~\ref{fig:period vs amplitude}, $u(T)=\SI{0.003}{s}$ is valid for $|\theta_0|\leq 0.20~ (u_A(T) < u_B(T))$.
+Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.28$. According to the consistent error bars in Figure~\ref{fig:period vs amplitude}, $u(T)=\SI{0.003}{s}$ is indeed valid for $\abs{\theta_0}\leq 0.28~ (u_A(T) < u_B(T))$. However, when $\abs{\theta_0}>0.28$, $T$ depends non-negligibly on $\theta_0$.
 
 \begin{figure}[H]
     \centering
