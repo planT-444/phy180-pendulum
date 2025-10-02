@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
@@ -28,33 +28,34 @@ PHY180 Pendulum Project \\ Lab 1: Period vs. Angle and Q factor
 }
 \end{center}
 
-
-
-
 \section{Introduction}
-
-This document describes, briefly, how you should format a paper. The Appendix has some notes on how to use TeX. Most physicists use TeX or one of its variants (like LaTeX) to write papers because it does an excellent job of typesetting equations.
-
-Your introduction should start with a brief summary of your entire report. What are your 1 to 4 most important results? Put them here. Once the reader has read the first paragraph, they should already know whether they want to read the rest of your paper. I recommend writing this summary last, after the conclusion. You really want the first paragraph of your introduction to be very similar to your conclusion.
-
-The rest of your introduction should include an overview of what you did at a high level (you built a pendulum, but don't include details like what materials you used here) and include any theory that is relevant. The introduction is the primary location for introducing new equations. It's not great style to introduce new physics equations in any of the subsequent sections.
-
-Before you write any paper ever, you need to understand who your target audience is. For this paper, pretend your target audience is a high school physics student. Obviously, your real target audience is the grader, but they will be grading your paper as if they were a high school physics student. This is important as it sets what assumptions you can make about what is common knowledge and what should be assumed to be new to the reader.
-
 The objective of this project was to determine the acccuracy of predictions from given models of a pendulum. The experiments examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$ and to measure the $Q$ factor, which represents how slowly its amplitude $\theta$ decays per $T$. Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T$ for $\theta > 0$ and $\theta < 0$ are equal). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally equal to a constant small-angle period $T_0$ when $\abs{\theta_0}\leq0.28$. Using a starting amplitude within the small-angle range, $Q$ was calculated from the experimentally determined exponential decay constant $\tau$ and $T$. The amplitude $\theta$ fits closely to the decaying exponential. Considering error, the calculated $Q$ agreed with the $Q$ found by counting the number of $T$ for $\theta$ to decay by a carefully selected factor. 
 
 Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker to search the recorded footage. The data, reformatted through Google Sheets, was run through a customized Python script (Wilson, 2025b) to generate best fit data and graphs.
+\begin{alignat}{2}
+    \theta(t)&=\theta_0 ~ \e^{-t/\tau} \cos{\left(\frac{2\pi}{T}t+\phi_0 \right)}
+        &\quad&\text{(Wilson, 2025a)} \label{amplitude vs. time}\\
+    \theta_{peak}(t)&=\theta_0 ~ \e^{-t/\tau} && \label{peak amplitude vs. time}\\
+    T(\theta_0) &= T_0(1 + B\theta_0 + C\theta_0^2)
+        &\quad&\text{(Wilson, 2025a)} \label{power series}\\
+    Q&=\pi\frac{\tau}{T}
+        &\quad&\text{(Wilson, 2025a)} \label{q calculated}\\ 
+    K&=\frac{Q}{n} && \label{q counted}
+    
+\end{alignat}
 
-The proposed model claimed that $T$ did not depend on $\theta_0$ at all, that the best fit 3-term power series
+The proposed model suggested that $\theta$ could be described by the function of time Equation \ref{amplitude vs. time} where  
+
+at the peaks of oscillations. AdditionallyThe model predicted that $T$ did not depend on $\theta_0$ at all, that the best fit 3-term power series
 \begin{equation}
-    $T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$
+    T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)
 \end{equation}
-would yield $T=T_0$ and $B,~ C=0$.
+would yield $T=T_0$ and $B,~ C=0$. 
 
 \section{Methods and Procedures}
 The string was tied around a screw, which was inserted into the mass (tennis ball). The polypropylene string had negligible strain caused by the weight of the mass. Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 \subsection{Measuring Period vs. Initial Amplitude}
-The period was measured using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}). 
+The period was measured using frame-by-frame analysis of the footage in the Open Source Physics (OSP) Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}).
 
 \begin{figure}[h]
     \centering
