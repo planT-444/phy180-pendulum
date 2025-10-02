@@ -57,13 +57,13 @@ def load_exponential_amplitude(filename):
     amplitude_error = np.array([np.deg2rad(0.2)] * len(amplitudes))
     return times, amplitudes, time_error, amplitude_error
 
-def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=14,
+def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=20,
              xlabel="", ylabel="Period (s)", 
              title="",
              output_filename = "graph.png"
              ):    
     plt.rcParams.update({'font.size': font_size})
-    plt.rcParams['figure.figsize'] = 10, 9
+    plt.rcParams['figure.figsize'] = 15, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
                

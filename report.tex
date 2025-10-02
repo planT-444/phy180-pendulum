@@ -37,44 +37,51 @@ The period was measured with 3 oscillations per trial to reduce type B uncertain
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[t]{0.45\textwidth}
+    \begin{minipage}[t]{0.30\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup1.jpg}
         \caption{Setup for Period vs. Initial Amplitude Experiment}
         \label{fig:setup1}
     \end{minipage}
     \hfill
-    \begin{minipage}[t]{0.45\textwidth}
+    \begin{minipage}[t]{0.30\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup2.jpg}
         \caption{Setup for Amplitude vs. Time (Q Factor Experiment)}
         \label{fig:setup2}
     \end{minipage}
-
+    \hfill
+    \begin{minipage}[t]{0.30\textwidth}
+        \centering
+        \includegraphics[height=0.2\textheight]{input-files/tracker.png}
+        \caption{Manually Tracking $\theta$ with OSP Tracker}
+        \label{fig:tracker}
+    \end{minipage}
 \end{figure}
 
 \subsection{Measuring Q Factor}
-Footage was collected starting at $\theta_0 \approx 0.26$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor (manual tracking).
-In addition to analyzing the overall decay to calculuate $Q$, $Q/n$, the number of oscillations (henceforth referred to as $K$) for the pendulum to decay by a factor of $\e ^ {-\pi/n}$, must be counted. 
-$Q=nK,$ so $u(Q)=nu(K)$. Smaller $n$ result in a larger number of oscillations for which $\theta\approx\theta_{final}$ experimentally \mbox{$(\,\abs{\theta_{final}-\theta} \leq 2u(\theta))$}, increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected, and the one with lower $u(Q)$ was used.
+Footage was collected starting at $\theta_0 \approx 0.26$. As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor. Not all oscillations were manually tracked for wellness purposes.
+In addition to analyzing the overall decay to calculuate $Q$, $Q/n$, the number of oscillations (henceforth referred to as $K$) for $\theta$ to decay by a factor of $\e ^ {-\pi/n}$, must be counted. 
+$Q=nK,$ so $u(Q)=nu(K)$. Smaller $n$ result in a larger number of oscillations for which $\theta\approx\theta_{final}$ experimentally \mbox{$(\,\abs{\theta_{final}-\theta} \leq 2u(\theta))$}, increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected, and the dataset with lower $u(Q)$ was used.
 
 
 \section{Results and Data Analysis}
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.4\textheight]{output-files/period vs amplitude.png}
+    \includegraphics[height=0.3\textheight]{output-files/period vs amplitude.png}
     \caption{
-        Graph of period vs. initial amplitude at release fitted to 3-term power series 
-        $T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$ (Wilson, 2025). 
+        Graph of period vs. initial amplitude at release fitted to the 3-term power series 
+        \mbox{$T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$} (Wilson, 2025). 
         Amplitude error bars are too small to be visible.
         The large outlier at $\theta_0=0.873$ was a result of a misdrop but was not artificially discluded.}
     \label{fig:period vs amplitude}
 \end{figure}
+
 The data fits the power series with values ($B,~ C=0$ predicted (Wilson)):
 \begin{align*}
-T_0&=1.528 \pm \SI{0.002}{s}, \\
-B&=-0.0006 \pm \SI{0.0005}{s}, \\
-C&=0.0563 \pm \SI{0.0006}{s}.
+    T_0&=1.528 \pm \SI{0.002}{s}, \\
+    B&=-0.0006 \pm \SI{0.0005}{s}, \\
+    C&=0.0563 \pm \SI{0.0006}{s}.
 \end{align*}
 As expected, $\abs{B - u(B)} < 2u(B)$ and $B \approx 0$ experimentally, implying a symmetrical pendulum since
 $T(\theta)=T(1+C\theta_0^2)$ is an even function (visually, Figure \ref{fig:period vs amplitude} confirms this).
@@ -109,14 +116,33 @@ Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.28$.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.4\textheight]{output-files/amplitude vs. time.png}
+    \includegraphics[height=0.3\textheight]{output-files/amplitude vs. time.png}
     \caption{
-        Graph of $\theta$ at peak of oscillation vs. $t$ fitted to the exponential
+        Graph of $\theta$ at the peaks of oscillations vs. $t$ fitted to the exponential
         $\theta(t) = \theta_0 \e ^ {t/\tau}$ (Wilson, 2025). 
         Time error bars are too small to be visible.
     }
     \label{fig:amplitude vs. time}
 \end{figure}
+
+The exponential fit values and period:
+\begin{align*}
+    \theta_0&= 0.271 \pm 0.002, \\
+    \tau&= 51.3 \pm \SI{0.5}{s} \\
+    T&= \frac{T_{final}+T_0}{2} \pm \frac{T_{final}-T_0}{2} = 1.083 \pm \SI{0.008}{s}
+\end{align*}
+From these values, 
+\begin{displaymath}
+    Q=\pi\frac{\tau}{T} 
+    \pm \max(\frac{u(\tau)}{\tau}, \frac{u(T)}{T})\,\pi\frac{\tau}{T}
+    =149\pm 2
+\end{displaymath}
+
+Type B uncertainties for measured variables:
+\begin{align*}
+    u(\theta)&= \SI{0.2}{\degree} = \SI{0.003}{\radian} \\
+    u(t)&= \SI{0.003}{s}
+\end{align*}
 
 
 Sometimes this is two different sections. However, this experiment has enough parts that I would combine them. This part might want subsections for each of the 4 topics (basically each graph could have its own subsection). Depending on how clear you write, subsections may not be necessary.
@@ -135,7 +161,6 @@ You will want to comment on how good the line of fit is, based on your uncertain
 It is likely that your first experiment will have a detailed analysis of uncertainties, and that the subsequent experiments will have basically the same uncertainty budgets. In this case you should not repeat the uncertainty analysis, but you should repeat the results. Something like, `As with the previous experiments, the largest source of uncertainty was due to blah and had a magnitude of blah.'
 
 Your results section {\bf must have quantitative conclusions}. Did the two ways of measuring the Q factor agree with each other? State this clearly with a quantitative assessment. You will need to explain your criteria for assessing this. For example, if you decided that if the values overlap by less than two uncertainty ranges then you will claim they agree, you should make this criteria explicit.
-
 
 
 \section{Conclusion}
