@@ -8,6 +8,7 @@
 \usepackage{siunitx}
 \usepackage{titlesec}
 \usepackage[labelfont=bf]{caption}
+
 \setlength{\textwidth}{6.5in}
 \setlength{\textheight}{9.9in}
 \setlength{\oddsidemargin}{0.0in}
@@ -40,7 +41,7 @@
 \vspace{-5ex}
 
 \section{Introduction}
-The objective of this project was to determine the acccuracy of predictions from a given model of a pendulum. The experiments examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$ and measured the $Q$ factor, which represents how slowly its amplitude $\theta$ decays per $T$. Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T$ for $\theta > 0$ and $\theta < 0$ are equal). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally equal to a constant small-angle period $T_0$ when $\abs{\theta_0}\leq0.28$. Using a starting amplitude within the small-angle range, $Q$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The amplitude $\theta$ fits the decaying exponential closely. Considering error, the calculated $Q$ agreed with the $Q$ found by counting the number of $T$ for $\theta$ to decay by a carefully selected factor. 
+The objective of this project was to determine the acccuracy of predictions from a given model of a pendulum. The experiments examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$ and measured the $Q$ factor, which represents how slowly its amplitude $\theta$ decays per $T$. Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T$ for $\theta > 0$ and $\theta < 0$ are equal). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally equal to a constant small-angle period $T_0$ when $\abs{\theta_0}\leq0.25 \pm 3$. Using a starting amplitude within the small-angle range, $Q$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The amplitude $\theta$ fits the decaying exponential closely. Considering error, the calculated $Q$ agreed with the $Q$ found by counting the number of $T$ for $\theta$ to decay by a carefully selected factor. 
 
 Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker to search the recorded footage. The data, reformatted through Google Sheets, was run through a customized Python script (Wilson, 2025b) to generate best fit data and graphs.
 
@@ -143,7 +144,7 @@ To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), i
     \end{math}
 \end{center}
 \pagebreak
-Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.28$. According to Figure~\ref{fig:period vs amplitude}, the error bars are constant in this range and $u(T)=\SI{0.003}{s}$ is indeed valid for $\abs{\theta_0}\leq 0.28~ (u_A(T) < u_B(T))$. However, $T$ depends on $\theta_0$, growing quadratically and non-negligibly when $\abs{\theta_0}>0.28$.
+Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.25 \pm 0.03$. According to Figure~\ref{fig:period vs amplitude}, the error bars are constant in this range and $u(T)=\SI{0.003}{s}$ is indeed valid for $\abs{\theta_0}\leq 0.25~ (u_A(T) < u_B(T))$. However, $T$ depends on $\theta_0$, growing quadratically and non-negligibly when $\abs{\theta_0}>0.25 \pm 0.03$.
 
 \begin{figure}[H]
     \centering
@@ -185,7 +186,7 @@ By counting $K$ and $u(K)$ for $n=2,~ n=3$:
 $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_2))$, while the minimum distance between $Q_3$ and $Q_{fit}$'s error bars is $\frac{5}{2}u(Q_{fit})=\frac{5}{9}u(Q_3)$, which is acceptably close. Thus, it can be concluded that the two methods for measuring Q agree.
 
 \section{Conclusion}
-By analyzing experimental uncertainty, it is concluded that the period $T$ can be approximated as the small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ for $\abs{\theta_0}\leq 0.28$ but grows quadratically for $\abs{\theta_0} > 0.28$. Note that $\abs{\theta_0}$ is used as that the pendulum was confirmed to be symmetric ($B=0$). The pendulum's $\theta$ can be accurately modelled with exponential decay $\theta=\theta_0\e ^ {\tau/t}$. $Q_{fit}=149\pm2$ calculated from $\tau$ and $T$ agrees with the $Q_2=150\pm10$ and $Q_3=165\pm9$ obtained by counting $K$ for $n=2$, $n=3$. 
+By analyzing experimental uncertainty, it is concluded that the period $T$ can be approximated as the small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ for $\abs{\theta_0}\leq 0.25\pm0.03$ but grows quadratically for $\abs{\theta_0} > 0.25 \pm 0.03$. Note that $\abs{\theta_0}$ is used as that the pendulum was confirmed to be symmetric ($B=0$). The pendulum's $\theta$ can be accurately modelled with exponential decay $\theta=\theta_0\e ^ {\tau/t}$. $Q_{fit}=149\pm2$ calculated from $\tau$ and $T$ agrees with the $Q_2=150\pm10$ and $Q_3=165\pm9$ obtained by counting $K$ for $n=2$, $n=3$. 
 For future experiments, the two-string setup which restricts non-planar motion should always be used. Measuring $T$ in other experiments will be quite error-tolerant since slight differences in $\theta_0$ negligibly change it and because $Q$ is sufficiently large for $T$ to change negligibly after a few oscillations. 
 
 \appendix
