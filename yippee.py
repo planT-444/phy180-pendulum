@@ -57,7 +57,7 @@ def load_exponential_amplitude(filename):
     amplitude_error = np.array([np.deg2rad(0.2)] * len(amplitudes))
     return times, amplitudes, time_error, amplitude_error
 
-def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=25,
+def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
              xlabel="", ylabel="Period (s)", 
              title="",
              output_filename = "graph.png"

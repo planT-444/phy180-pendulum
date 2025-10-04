@@ -7,6 +7,7 @@
 \usepackage{commath}
 \usepackage{siunitx}
 \usepackage{titlesec}
+\usepackage{hyperref}
 \usepackage[labelfont=bf]{caption}
 
 \setlength{\textwidth}{6.5in}
@@ -35,15 +36,15 @@
 \begin{center}
     \bf{\LARGE PHY180 Pendulum Project \\ Lab 1: Period vs. Angle and Q factor} \\
     \vspace{2 ex}
-    {\large By William Hu}
+    {\large William Hu}
 \end{center}
 
 \vspace{-5ex}
 
 \section{Introduction}
-The objective of this project was to determine the acccuracy of predictions from a given model of a pendulum. The experiments examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$ and measured the $Q$ factor, which represents how slowly its amplitude $\theta$ decays per $T$. Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T$ for $\theta > 0$ and $\theta < 0$ are equal). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally equal to a constant small-angle period $T_0$ when $\abs{\theta_0}\leq0.25 \pm 3$. Using a starting amplitude within the small-angle range, $Q$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The amplitude $\theta$ fits the decaying exponential closely. Considering error, the calculated $Q$ agreed with the $Q$ found by counting the number of $T$ for $\theta$ to decay by a carefully selected factor. 
+The objective of this project was to determine the acccuracy of predictions by the \textbf{damped harmonic oscillator} model of a pendulum (Wilson, 2025a). The experiments examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$ and measured the $Q$ factor, which represents how slowly the amplitude $\theta$ decays per $T$. Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T$ for $\theta > 0$ and $\theta < 0$ are equal). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally consistent with a constant small-angle period $T_0$ when $\abs{\theta_0}\leq0.25 \pm 3$. Using a starting amplitude within the small-angle range, $Q$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The amplitude $\theta$ fits the decaying exponential closely. Considering error, the calculated $Q$ agreed with the $Q$ found by counting the number of $T$ for $\theta$ to decay by a carefully selected factor. 
 
-Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker to search the recorded footage. The data, reformatted through Google Sheets, was run through a customized Python script (Wilson, 2025b) to generate best fit data and graphs.
+Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker (Brown, 2025) to search the recorded footage. The data, reformatted through Google Sheets, was run through Python script customized from the one provided (Wilson, 2025b) to generate best fit data and graphs.
 
 The following equations may be referenced throughout the report:
 \begin{align}
@@ -58,13 +59,13 @@ The following equations may be referenced throughout the report:
 The proposed model suggested that $\theta$ could be described by the function of time Equation~\ref{amplitude vs. time} (Wilson, 2025a) where Equation \ref{max amplitude vs. time} describes the maximum amplitude per oscillation. The model also predicted that $T$ did not depend on $\theta_0$ at all, that the best fit 3-term power series Equation \ref{power series} (Wilson, 2025a) would yield $T=T_0$ and $B,~ C=0$. 
 Equation \ref{q calculated} (Wilson, 2025a) quantifies $Q$ in terms of other obtainable variables. By Equation~\ref{q counted}, $Q$ can also be found by counting $K$, the number of oscillations for $\theta$ to decay by a factor of $\e^{-\pi/n}$ for any $n$.
 
-When analyzing uncertainties, two values $a \pm u(a),~b \pm u(b),~a < b$ are in fact considered experimentally indistinguishable if their error bars overlap ($a + u(a) \geq b - u(b))$. In the special case where $u(a)=u(b)$, $a$ and $b$ agree within error if $\abs{b-a}\leq 2u(a).$
+When analyzing uncertainties, two values $a \pm u(a),~b \pm u(b)$ (where $a<b$) are in fact considered experimentally indistinguishable if their error bars overlap ($a + u(a) \geq b - u(b))$. In the special case where $u(a)=u(b)$, $a$ and $b$ agree within error if $\abs{b-a}\leq 2u(a).$
 
 \pagebreak
 \section{Methods and Procedures}
 The string was tied around a screw, which was inserted into the mass (tennis ball). The polypropylene string had negligible strain caused by the weight of the mass. Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 \subsection{Measuring Period vs. Initial Amplitude}
-The period was measured using frame-by-frame analysis of the footage in the OSP Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}).
+The period was measured using frame-by-frame analysis of the footage in OSP Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}).
 
 \begin{figure}[h]
     \centering
@@ -91,15 +92,15 @@ The period was measured using frame-by-frame analysis of the footage in the OSP 
 \end{figure}
 
 \subsection{Measuring Q Factor}
-Footage was collected starting at $\theta_0 \approx 0.26$ (within the small-angle approximation). As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor. Not every oscillation was manually tracked. It would be unnecessary, since it was discovered that the decay constant $\tau \gg T$.
+Footage was collected starting at $\theta_{max} \approx 0.26$ (within the small-angle approximation). As the pendulum could drift off plane with many oscillations, the mass was now hung from two strings of equal length to prevent motion normal to the desired plane (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the centre of rotation to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor (see Figure~\ref{fig:tracker}). Not every oscillation was manually tracked. It would be unnecessary, since $\theta_{max}$ does not change meaningfully after small amounts of oscillations (it was later discovered that decay constant $\tau \gg T$). $T_0$ and $T_{final}$ were also tracked for $Q$ calculations.
 
-$Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. Selecting $n$ can be difficult because smaller $n$ can decrease $u(Q)$ but also result in a wider range of acceptable $K$ values (oscillations for which $\theta$ and $\theta_{final}$ agree within error), increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected.
+$Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. Selecting $n$ can be difficult because smaller $n$ can decrease $u(Q)$ but also result in a wider range of acceptable $K$ values (oscillations for which $\theta_{max}$ and $\theta_{final}$ agree within error), increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected.
 
 
 \section{Results and Data Analysis}
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.25\textheight]{output-files/period vs amplitude.png}
+    \includegraphics[height=0.28\textheight]{output-files/period vs amplitude.png}
     \caption{
         Graph of period vs. initial amplitude at release fitted to Equation~\ref{power series}, the 3-term power series
         \mbox{$T(\theta_0) = T_0(1 + B\theta_0 + C\theta_0^2)$}. $T_0$ is located at the vertex.
@@ -109,26 +110,14 @@ $Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. Selecting $n$ can be difficu
     \label{fig:period vs amplitude}
 \end{figure}
 
-The data in Figure \ref{fig:period vs amplitude} fits the power series with values ($B,~ C=0$ predicted):
-\begin{align*}
-    T_0&=1.528 \pm \SI{0.002}{s}, \\
-    B&=-0.0006 \pm \SI{0.0005}{s}, \\
-    C&=0.0563 \pm \SI{0.0006}{s}.
-\end{align*}
-As expected, $B\approx0~(\,\abs{B - u(B)} < 2u(B))$, implying a symmetrical pendulum since \\
-$T(\theta)=T(1+C\theta_0^2)$ is an even function (visually, Figure \ref{fig:period vs amplitude} confirms this).
+The type B uncertainty in initial amplitude $u(\theta_0)=\SI{0.5}{\degree}=\SI{0.009}{rad}$ comes from the precision of the protractor's markings and the thickness of the string (non-negligible for a small protractor). The error in period $u(T)=\max(u_A(T), u_B(T))$ considers both uncertainties, type A (standard error of the mean of repeated trials $\frac{\sigma_T}{\sqrt{N}})$ and type B (footage limitation $1/\SI{120}{FPS}/\SI{3}{oscillations}=\SI{0.003}{s}$).
 
-However, contrary to prediction, $C \neq 0$ experimentally (considering error $C \gg 2u(C)$, $C$ cannot plausibly considered 0). Indeed, $T(\theta_0)$ grows quadratically with $\abs{\theta_0}$ according to Figure \ref{fig:period vs amplitude}.
+The data in Figure \ref{fig:period vs amplitude} fits the power series with values
+$T_0=1.528 \pm \SI{0.002}{s},\:B=-0.0006 \pm \SI{0.0005}{s},\:C=0.0563 \pm \SI{0.0006}{s}.$
+As the model predicted, $B\approx0~(\,\abs{B - u(B)} < 2u(B))$, implying a symmetrical pendulum since 
+$T(\theta)=T(1+C\theta_0^2)$ is an even function (visually, Figure \ref{fig:period vs amplitude} confirms this). However, contrary to model's prediction, $C \neq 0$ experimentally (considering error $C \gg 2u(C)$, $C$ cannot plausibly considered 0). Indeed, $T(\theta_0)$ grows quadratically with $\abs{\theta_0}$ according to the graph.
 
-The error for the measured variables:
-\begin{alignat*}{2}
-    u(\theta_0)&=\SI{0.5}{\degree}=\SI{0.009}{rad} 
-        &\quad& \text{(protractor)} \\
-    u(T)&=\max(u_A(T), u_B(t)) 
-        &\quad& \left(\frac{\sigma}{\sqrt{N}}, ~ u(\text{footage})\right) \\
-    &=\max(u_A(T), \SI{0.003}{s}) 
-        &\quad& (1/\SI{120}{FPS}/\SI{3}{oscillations})
-\end{alignat*}
+
 For small $\theta_0$, $u(T)=\SI{0.003}{s}$.
 To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), it must be determined when they agree within error ($T-T_0=T_0C\theta_0^2 \leq 2u(T)$) 
 \begin{center}
@@ -143,56 +132,53 @@ To determine what $\theta_0$ allow $T\approx T_0$ (small angle approximation), i
                 \sqrt{\frac{u(T)}{T_0 C}}=0.25 \pm 0.03
     \end{math}
 \end{center}
-\pagebreak
-Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.25 \pm 0.03$. According to Figure~\ref{fig:period vs amplitude}, the error bars are constant in this range and $u(T)=\SI{0.003}{s}$ is indeed valid for $\abs{\theta_0}\leq 0.25~ (u_A(T) < u_B(T))$. However, $T$ depends on $\theta_0$, growing quadratically and non-negligibly when $\abs{\theta_0}>0.25 \pm 0.03$.
+
+Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.25 \pm 0.03$. According to the residuals in Figure~\ref{fig:period vs amplitude}, the size of the error bars are constant in this range and $u(T)=\SI{0.003}{s}$ is indeed valid for $\abs{\theta_0}\leq 0.25~ (u_A(T) < u_B(T))$. However, when $\abs{\theta_0}>0.25 \pm 0.03$, $T$ depends on $\theta_0$, growing quadratically and non-negligibly.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=0.25\textheight]{output-files/amplitude vs. time.png}
     \caption{
-        Graph of the decaying amplitude at the peaks of oscillations vs. time fitted to Equation~\ref{amplitude vs. time}, the exponential
-        $\theta_{max}(t) = \theta_0 \e ^ {t/\tau}$. $\abs{\frac{\Delta\theta}{\Delta t}}$ per oscillation decreases, which complicates identifying $K$ when many $\theta$ agree with $\theta_{final}$ within error. 
+        Graph of the decaying peak amplitudes vs. time fitted to Equation~\ref{max amplitude vs. time}, the exponential
+        $\theta_{max}(t) = \theta_0 \e ^ {t/\tau}$. $\abs{\frac{\Delta\theta_{max}}{\Delta t}}$ per oscillation decreases, which complicates identifying $K$ when many $\theta_{max}$ agree with $\theta_{final}$ within error. 
         $t$ error bars are too small to be visible.
-        Most, but not all $\theta$ error bars hit the best hit curve, meaning the amplitude can be accurately modelled with exponential decay.
+        Most, but not all $\theta_{max}$ error bars hit the best hit curve, meaning the amplitude can be accurately modelled with exponential decay.
     }
     \label{fig:amplitude vs. time}
 \end{figure}
+% \vspace{-0.5cm}
+The type B uncertainties are $u(\theta_{max})= \SI{0.2}{\degree} = \SI{0.003}{\radian}$ (smaller than before, since OSP Tracker's protractor radius can be enlarged so that the string thickness spans less ticks) and $u(t)= \SI{0.008}{s}$ ($1/\SI{120}{FPS})$
 
-Type B uncertainties for measured variables:
+The exponential fit values and period for Figure \ref{fig:amplitude vs. time} are 
+$\theta_0= 0.271 \pm 0.002,\:\tau= 51.3 \pm \SI{0.5}{s},$
+\hbox{$T = 1.083 \pm \SI{0.008}{s}$}. $T$ is considered the average of $T_0,~T_{final}$ with an 
+uncertainty half their distance. Using best fit values and also counting $K$, the 
+three experimental $Q$ factors are:
 \begin{alignat*}{2}
-    u(\theta)&= \SI{0.2}{\degree} = \SI{0.003}{\radian} 
-        &\quad& \text{(OSP Tracker's protractor, accounting for string width)}\\
-    u(t)&= \SI{0.008}{s} 
-        &\quad& \text{(1/\SI{120}{FPS})}
+    Q_{fit}&=\pi\frac{\tau}{T} 
+        \pm \max(\frac{u(\tau)}{\tau}, \frac{u(T)}{T})\,\pi\frac{\tau}{T}
+            &=&149\pm 2 \\
+    Q_2&=2(K_2 \pm u(K_2))=2(77 \pm 5)&=&154 \pm 10 \\
+    Q_3&=3(K_3 \pm u(K_3))=3(55 \pm 3)&=&165 \pm 9
 \end{alignat*}
-
-The exponential fit values and period for Figure \ref{fig:amplitude vs. time}:
-\begin{align*}
-    \theta_0&= 0.271 \pm 0.002, \\
-    \tau&= 51.3 \pm \SI{0.5}{s} \\
-    T&= \frac{T_0+T_{final}}{2} \pm \frac{T_0-T_{final}}{2} = 1.083 \pm \SI{0.008}{s}
-\end{align*}
-From these values, 
-\begin{displaymath}
-    Q_{fit}=\pi\frac{\tau}{T} 
-    \pm \max(\frac{u(\tau)}{\tau}, \frac{u(T)}{T})\,\pi\frac{\tau}{T}
-    =149\pm 2
-\end{displaymath}
-By counting $K$ and $u(K)$ for $n=2,~ n=3$: 
-\begin{align*}
-    Q_2&=2(K_2 \pm u(K_2))=2(77 \pm 5)=154 \pm 10 \\
-    Q_3&=3(K_3 \pm u(K_3))=3(55 \pm 3)=165 \pm 9
-\end{align*}
-$Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_2))$, while the minimum distance between $Q_3$ and $Q_{fit}$'s error bars is $\frac{5}{2}u(Q_{fit})=\frac{5}{9}u(Q_3)$, which is acceptably close. Thus, it can be concluded that the two methods for measuring Q agree.
+$Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_2))$, while the minimum distance between $Q_3$ and $Q_{fit}$'s error bars is $\frac{5}{2}u(Q_{fit})=\frac{5}{9}u(Q_3)$, which is very close to fully agreeing (a 4\% difference). Thus, it can be concluded that the two methods for measuring $Q$ agree.
 
 \section{Conclusion}
-By analyzing experimental uncertainty, it is concluded that the period $T$ can be approximated as the small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ for $\abs{\theta_0}\leq 0.25\pm0.03$ but grows quadratically for $\abs{\theta_0} > 0.25 \pm 0.03$. Note that $\abs{\theta_0}$ is used as that the pendulum was confirmed to be symmetric ($B=0$). The pendulum's $\theta$ can be accurately modelled with exponential decay $\theta=\theta_0\e ^ {\tau/t}$. $Q_{fit}=149\pm2$ calculated from $\tau$ and $T$ agrees with the $Q_2=150\pm10$ and $Q_3=165\pm9$ obtained by counting $K$ for $n=2$, $n=3$. 
+By analyzing experimental uncertainty, it is concluded that the period $T$ can be approximated as the small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ for $\abs{\theta_0}\leq 0.25\pm0.03$ but grows quadratically for $\abs{\theta_0} > 0.25 \pm 0.03$. Note that $\abs{\theta_0}$ is used as that the pendulum was confirmed to be symmetric ($B=0$). The pendulum's $\theta_{max}$ per oscillation can be accurately modelled with exponential decay $\theta_{max}(t)=\theta_0\e ^ {\tau/t}$. $Q_{fit}=149\pm2$ calculated from $\tau$ and $T$ agrees with the $Q_2=150\pm10$ and $Q_3=165\pm9$ obtained by counting $K$ for $n=2$, $n=3$. 
+
 For future experiments, the two-string setup which restricts non-planar motion should always be used. Measuring $T$ in other experiments will be quite error-tolerant since slight differences in $\theta_0$ negligibly change it and because $Q$ is sufficiently large for $T$ to change negligibly after a few oscillations. 
 
-\appendix
+\section{References}
+    \hangindent=2em
+    \noindent Brown, Douglas. \emph{Tracker Video Analysis and Modeling Tool},  
+        Open Source Physics, Version 6.3.2, 2025.
+        \url{https://physlets.org/tracker/}
 
-% TODO: CITE OSP TRACKER
+    Wilson, Brian. \emph{PHY180 Pendulum Project (2025)}.
+        Downloaded from Quercus, 2025a.
 
+    Wilson, Brian. \emph{fit\_black\_box.py}.
+        Downloaded from Quercus, 2025b.
 
 
 \end{document}
