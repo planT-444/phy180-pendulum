@@ -56,14 +56,14 @@ The following equations may be referenced throughout the report:
     Q&=nK \label{q counted}
 \end{align}
 
-The proposed model suggested that $\theta$ could be described by the function of time Equation~\ref{amplitude vs. time} (Wilson, 2025a) where Equation \ref{max amplitude vs. time} describes the maximum amplitude per oscillation. The model also predicted that $T$ did not depend on $\theta_0$ at all, that the best fit 3-term power series Equation \ref{power series} (Wilson, 2025a) would yield $T=T_0$ and $B,~ C=0$. 
+The damped harmonic oscillator model suggested that $\theta$ could be described by the function of time Equation~\ref{amplitude vs. time} (Wilson, 2025a) where Equation \ref{max amplitude vs. time} describes the maximum amplitude per oscillation. The model also predicted that $T$ did not depend on $\theta_0$ at all, that the best fit 3-term power series Equation \ref{power series} (Wilson, 2025a) would yield $B,~ C=0$ and $T=T_0$. 
 Equation \ref{q calculated} (Wilson, 2025a) quantifies $Q$ in terms of other obtainable variables. By Equation~\ref{q counted}, $Q$ can also be found by counting $K$, the number of oscillations for $\theta$ to decay by a factor of $\e^{-\pi/n}$ for any $n$.
 
 When analyzing uncertainties, two values $a \pm u(a),~b \pm u(b)$ (where $a<b$) are in fact considered experimentally indistinguishable if their error bars overlap ($a + u(a) \geq b - u(b))$. In the special case where $u(a)=u(b)$, $a$ and $b$ agree within error if $\abs{b-a}\leq 2u(a).$
 
 \pagebreak
 \section{Methods and Procedures}
-The string was tied around a screw, which was inserted into the mass (tennis ball). The polypropylene string had negligible strain caused by the weight of the mass. Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
+The string was tied around a screw, which was inserted into the mass (a tennis ball). The polypropylene string had negligible strain caused by the weight of the mass. Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the centre of rotation. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 \subsection{Measuring Period vs. Initial Amplitude}
 The period was measured using frame-by-frame analysis of the footage in OSP Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}).
 
@@ -72,21 +72,21 @@ The period was measured using frame-by-frame analysis of the footage in OSP Trac
     \begin{minipage}[t]{0.30\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup1.jpg}
-        \caption{Setup for Period vs. Initial Amplitude Experiment}
+        \caption{Setup with protractor for Period vs. Initial Amplitude Experiment}
         \label{fig:setup1}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.30\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/setup2.jpg}
-        \caption{Setup for Amplitude vs. Time (Q Factor Experiment)}
+        \caption{Setup with two strings for Amplitude vs. Time (Q Factor Experiment)}
         \label{fig:setup2}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.30\textwidth}
         \centering
         \includegraphics[height=0.2\textheight]{input-files/tracker.png}
-        \caption{Manually Tracking $\theta$ with OSP Tracker}
+        \caption{Manually Tracking $\theta$ with OSP Tracker's protractor}
         \label{fig:tracker}
     \end{minipage}
 \end{figure}
@@ -109,7 +109,7 @@ $Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. Selecting $n$ can be difficu
         Not all $T$ error bars hit the best fit curve, which is expected.}
     \label{fig:period vs amplitude}
 \end{figure}
-
+\vspace{-0.5cm}
 The type B uncertainty in initial amplitude $u(\theta_0)=\SI{0.5}{\degree}=\SI{0.009}{rad}$ comes from the precision of the protractor's markings and the thickness of the string (non-negligible for a small protractor). The error in period $u(T)=\max(u_A(T), u_B(T))$ considers both uncertainties, type A (standard error of the mean of repeated trials $\frac{\sigma_T}{\sqrt{N}})$ and type B (footage limitation $1/\SI{120}{FPS}/\SI{3}{oscillations}=\SI{0.003}{s}$).
 
 The data in Figure \ref{fig:period vs amplitude} fits the power series with values
@@ -137,16 +137,16 @@ Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.25 \
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.25\textheight]{output-files/amplitude vs. time.png}
+    \includegraphics[height=0.28\textheight]{output-files/amplitude vs. time.png}
     \caption{
         Graph of the decaying peak amplitudes vs. time fitted to Equation~\ref{max amplitude vs. time}, the exponential
-        $\theta_{max}(t) = \theta_0 \e ^ {t/\tau}$. $\abs{\frac{\Delta\theta_{max}}{\Delta t}}$ per oscillation decreases, which complicates identifying $K$ when many $\theta_{max}$ agree with $\theta_{final}$ within error. 
+        $\theta_{max}(t) = \theta_0 \e ^ {t/\tau}$. $\abs{\Delta\theta_{max}}$ per oscillation decreases, which complicates identifying $K$ when many $\theta_{max}$ agree with $\theta_{final}$ within error. 
         $t$ error bars are too small to be visible.
-        Most, but not all $\theta_{max}$ error bars hit the best hit curve, meaning the amplitude can be accurately modelled with exponential decay.
+        Most, but not all $\theta_{max}$ error bars hit the best fit curve, meaning the amplitude can be accurately modelled with exponential decay.
     }
     \label{fig:amplitude vs. time}
 \end{figure}
-% \vspace{-0.5cm}
+\vspace{-0.5cm}
 The type B uncertainties are $u(\theta_{max})= \SI{0.2}{\degree} = \SI{0.003}{\radian}$ (smaller than before, since OSP Tracker's protractor radius can be enlarged so that the string thickness spans less ticks) and $u(t)= \SI{0.008}{s}$ ($1/\SI{120}{FPS})$
 
 The exponential fit values and period for Figure \ref{fig:amplitude vs. time} are 
@@ -166,8 +166,13 @@ $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_
 \section{Conclusion}
 By analyzing experimental uncertainty, it is concluded that the period $T$ can be approximated as the small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ for $\abs{\theta_0}\leq 0.25\pm0.03$ but grows quadratically for $\abs{\theta_0} > 0.25 \pm 0.03$. Note that $\abs{\theta_0}$ is used as that the pendulum was confirmed to be symmetric ($B=0$). The pendulum's $\theta_{max}$ per oscillation can be accurately modelled with exponential decay $\theta_{max}(t)=\theta_0\e ^ {\tau/t}$. $Q_{fit}=149\pm2$ calculated from $\tau$ and $T$ agrees with the $Q_2=150\pm10$ and $Q_3=165\pm9$ obtained by counting $K$ for $n=2$, $n=3$. 
 
-For future experiments, the two-string setup which restricts non-planar motion should always be used. Measuring $T$ in other experiments will be quite error-tolerant since slight differences in $\theta_0$ negligibly change it and because $Q$ is sufficiently large for $T$ to change negligibly after a few oscillations. 
+For future experiments, the two-string setup which restricts non-planar motion should always be used. Measuring $T$ in other experiments will be quite error-tolerant since slight differences in $\theta_0$ negligibly change it and because $Q$ is sufficiently large for $T$ to change negligibly after a few oscillations.
 
+\appendix
+\section{Use of AI for this report}
+Generative AI (ChatGPT) was only queried for basic questions about matplotlib, for help fixing \LaTeX{} compilation errors, and for general conventions in lab report formatting. No content was conceived, formulated, articulated, or revised by ChatGPT.
+
+\pagebreak
 \section{References}
     \hangindent=2em
     \noindent Brown, Douglas. \emph{Tracker Video Analysis and Modeling Tool},  

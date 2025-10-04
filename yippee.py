@@ -63,7 +63,7 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
              output_filename = "graph.png"
              ):    
     plt.rcParams.update({'font.size': font_size})
-    plt.rcParams['figure.figsize'] = 15, 9
+    plt.rcParams['figure.figsize'] = 18, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
                
@@ -94,7 +94,7 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     # Plot the best fit curve on top of the data points as a line.
     # NOTE: you may want to change the value of label to something better!!
 
-    ax1.legend(loc='upper right')
+    ax1.legend(loc='upper right' if output_filename=="amplitude vs. time" else 'lower right')
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
