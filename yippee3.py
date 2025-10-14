@@ -40,7 +40,7 @@ def load_period_vs_length(filename):
     period_b_uncertainty = 0.0008 # 120 fps, 3 oscillations: 1/120/3 = 2.78e-3 ~ 3e-3
     for length, periods in filtered_periods.items():
         lengths.append(length)
-        length_error.append(np.deg2rad(0.3))
+        length_error.append(0.5)
         mean_periods.append(np.mean(periods))
         period_error.append(max(
             period_b_uncertainty, 
@@ -49,17 +49,17 @@ def load_period_vs_length(filename):
         print(period_b_uncertainty, 
             statistics.stdev(periods) / len(periods) ** 0.5)
     print(period_error)
+    print(mean_periods)
     return (
         np.array(lengths), 
         np.array(mean_periods), 
         np.array(length_error), 
         np.array(period_error)
     ), (
-        np.array([log(length) for length in lengths]),
-        np.array([log(mean_period) for mean_period in mean_periods]),
-        np.array(length_error), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
-        np.array(period_error)
-
+        np.log(lengths),
+        np.log(mean_periods),
+        [0] * len(lengths), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
+        [0] * len(lengths), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
     )
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
@@ -144,21 +144,28 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
 
     return None
     
-def power_series(theta, a, b, c):
-    return a * (1 + b * theta + c * theta ** 2)
+def power_series(L, k, n):
+    return k * L ** n
 
-def exponential(time, theta_0, tau):
-    return theta_0 * np.e ** -(time/tau)
-
+"""
+T = k * L ** n
+logT = log(k * L ** n)
+     = nlogk + nlogL
+"""
+def log_line(L, k, n):
+    return n * np.log(k) + n * np.log(L)
 
 input_dir = Path(__file__).parent / "input-files"
 if __name__ == '__main__':
+    tvsl_data, log_tvsl_data = load_period_vs_length(input_dir / "PHY180 Pendulum - T vs L.csv")
     plot_fit(power_series, 
-             *load_period_vs_length(input_dir / "PHY180 Pendulum - Sheet2.csv"),
-             xlabel="Initial Amplitude (rad)",
+             *tvsl_data,
+             xlabel="Length (cm)",
              ylabel="Period (s)",
-             output_filename = "period vs amplitude")
-    plot_fit(exponential, *load_exponential_amplitude(input_dir / "PHY180 Pendulum - Sheet4.csv"),
-             xlabel="Time (s)",
-             ylabel="Amplitude (rad)",
-             output_filename = "amplitude vs. time")
+             output_filename = "period vs length")
+    plot_fit(log_line, 
+             *log_tvsl_data,
+             xlabel="loggy Length (cm)",
+             ylabel="loggy Period (s)",
+             output_filename = "period vs length logged")
+    
