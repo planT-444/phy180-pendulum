@@ -58,8 +58,8 @@ def load_period_vs_length(filename):
     ), (
         np.log(lengths),
         np.log(mean_periods),
-        [0] * len(lengths), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
-        [0] * len(lengths), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
+        np.array(length_error), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
+        np.array(period_error), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
     )
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
@@ -150,10 +150,11 @@ def power_series(L, k, n):
 """
 T = k * L ** n
 logT = log(k * L ** n)
-     = nlogk + nlogL
+     = logk + nlogL
 """
-def log_line(L, k, n):
-    return n * np.log(k) + n * np.log(L)
+
+def line(x, b, m):
+    return m * x + b
 
 input_dir = Path(__file__).parent / "input-files"
 if __name__ == '__main__':
@@ -163,7 +164,7 @@ if __name__ == '__main__':
              xlabel="Length (cm)",
              ylabel="Period (s)",
              output_filename = "period vs length")
-    plot_fit(log_line, 
+    plot_fit(line, 
              *log_tvsl_data,
              xlabel="loggy Length (cm)",
              ylabel="loggy Period (s)",
