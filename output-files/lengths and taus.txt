@@ -1,0 +1,5 @@
+Best fit parameters, with uncertainties, but not rounded off properly:
+Length 36.5:
+0.17204968178466234 +/- 0.0022107309528780292
+71.63587264007008 +/- 2.432974224654857
+
