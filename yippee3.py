@@ -37,10 +37,10 @@ def load_period_vs_length(filename):
     length_error = []
     mean_periods = []
     period_error = []
-    period_b_uncertainty = 0.0008 # 120 fps, 3 oscillations: 1/120/3 = 2.78e-3 ~ 3e-3
+    period_b_uncertainty = 0.0008 # 120 fps, 10 oscillations
     for length, periods in filtered_periods.items():
         lengths.append(length)
-        length_error.append(0.5)
+        length_error.append(0.005)
         mean_periods.append(np.mean(periods))
         period_error.append(max(
             period_b_uncertainty, 
@@ -58,8 +58,8 @@ def load_period_vs_length(filename):
     ), (
         np.log(lengths),
         np.log(mean_periods),
-        np.array(length_error), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
-        np.array(period_error), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
+        np.array([0.1] * len(lengths)), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
+        np.array([0.1] * len(lengths)), # TODO: FIGURE OUT WTF TO DO WITH THESE ERROR BARS
     )
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
@@ -161,12 +161,12 @@ if __name__ == '__main__':
     tvsl_data, log_tvsl_data = load_period_vs_length(input_dir / "PHY180 Pendulum - T vs L.csv")
     plot_fit(power_series, 
              *tvsl_data,
-             xlabel="Length (cm)",
+             xlabel="Length (m)",
              ylabel="Period (s)",
              output_filename = "period vs length")
     plot_fit(line, 
              *log_tvsl_data,
-             xlabel="loggy Length (cm)",
+             xlabel="loggy Length (m)",
              ylabel="loggy Period (s)",
              output_filename = "period vs length logged")
     
