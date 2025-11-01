@@ -23,12 +23,12 @@ import matplotlib.pyplot as plt
 import statistics
 from pathlib import Path
 
-def load_q(lengths):
+def load_q(filename):
     output = ""
     input_dir = Path(__file__).parent / "input-files"
 
-    filename = input_dir / f"PHY180 Pendulum - Q vs L.csv"
-    lengths, Qs, Q_errors = np.genfromtxt(filename, usecols=(0,1,2), skip_header=1, unpack = True, delimiter = ',')
+    filename = input_dir / filename
+    lengths, Qs, Q_errors = np.genfromtxt(filename, usecols=(0,3,4), skip_header=1, unpack = True, delimiter = ',')
     length_errors = np.array([0.5] * len(lengths))
     print(lengths)
     print(Qs)
@@ -117,13 +117,18 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
 
 
 
-def log(L, theta_0, tau):
-    return 
+def quadratic(L, A, B, C):
+    return A * L ** 2 + B * L + C
 
 
 if __name__ == '__main__':
-    plot_fit(log, 
-             *load_q,
+    plot_fit(quadratic, 
+             *load_q("PHY180 Pendulum - Q vs L.csv"),
              xlabel="Length (cm)",
              ylabel="Q (s)",
-             output_filename = "period vs length")
+             output_filename = "Q vs length")
+    plot_fit(quadratic, 
+             *load_q("PHY180 Pendulum - GET OUT.csv"),
+             xlabel="Length (cm)",
+             ylabel="Q (s)",
+             output_filename = "Q vs length (no outlier)")
