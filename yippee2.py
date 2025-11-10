@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 import statistics
 from pathlib import Path
 
-def load_fit_exponential_amplitudes(lengths):
+def load_fit_exponential_amplitudes():
     output = ""
     input_dir = Path(__file__).parent / "input-files"
     period_filename = input_dir / "PHY180 Pendulum - T vs L.csv"
@@ -34,7 +34,7 @@ def load_fit_exponential_amplitudes(lengths):
         if length not in filtered_periods:
             filtered_periods[length] = []
         filtered_periods[length].append(period)
-        
+
     lengths = []
     mean_periods = []
     period_error = []
@@ -58,23 +58,44 @@ def load_fit_exponential_amplitudes(lengths):
     print(mean_periods)
     print('\n\n\n')
     
-    for i, length in enumerate(sorted(lengths)):
-        filename = input_dir / f"PHY180 Pendulum - L={length}.csv"
-        times, amplitudes = np.genfromtxt(filename, usecols=(0,1), skip_header=1, unpack = True, delimiter = ',')
+    Qs = []
+    Q_uncertainties = []
+    for length_i, length in enumerate(sorted(lengths)):
+        if length * 100 == 42.1:
+            continue
+        print(f"PHY180 Pendulum - L={length * 100:.1f}.csv")
+        
+        filename = input_dir / f"PHY180 Pendulum - L={length * 100:.1f}.csv"
+        times, amplitudes = np.genfromtxt(filename, usecols=(3,4), skip_header=1, unpack = True, delimiter = ',')
         time_error = np.array([1/120] * len(times))
         amplitude_error = np.array([np.deg2rad(0.3)] * len(amplitudes))
-        print(times)
-        print(amplitudes)
-               
-        popt, pcov = optimize.curve_fit(exponential, times, amplitudes, sigma=amplitude_error, p0=None, absolute_sigma=True)
+        if length == 0.365:
+            print(times)
+            print(amplitudes)
+        popt, pcov = optimize.curve_fit(exponential, times, amplitudes, sigma=amplitude_error, p0=None, bounds = ([0,0], [np.inf, np.inf]), absolute_sigma=True)
         # The best fit values are popt[], while pcov[] tells us the uncertainties.
 
         puncert = np.sqrt(np.diagonal(pcov))
         # The uncertainties are the square roots of the diagonal of the covariance matrix
+
+        tau = popt[1]
+        tau_uncert = puncert[1]
+        T = mean_periods[length_i]
+        Qs.append(np.pi * tau/T)
+        Q_uncertainties.append(
+            np.pi * tau/T * max(
+                period_error[length_i] / T,
+                tau_uncert / tau
+            )
+        )
+
         output += f"Length {length}:\n"
-        for i in range(len(popt)):
-            output += f"{popt[i]} +/- {puncert[i]}\n"
+        output += f"theta_0: {popt[0]} +/- {puncert[0]}\n"
+        output += f"tau: {popt[1]} +/- {puncert[1]}\n"
+        output += f"Q: {Qs[length_i]} +/- {Q_uncertainties[length_i]}\n"
         output += "\n"
+        
+        
         
     output_dir = Path(__file__).parent / "output-files"
         
@@ -83,8 +104,8 @@ def load_fit_exponential_amplitudes(lengths):
         f.write(output)
 
 def exponential(time, theta_0, tau):
-    return theta_0 * np.e ** -(time/tau)
+    return theta_0 * np.exp(-time/tau)
 
 
 if __name__ == '__main__':
-    load_fit_exponential_amplitudes([36.5])
+    load_fit_exponential_amplitudes()
