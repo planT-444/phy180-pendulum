@@ -1,22 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-This program will find the best fit of a given function to a given set
-of data (including errorbars). It prints the results, with uncertainties.
-Then it plots the graph and displays it to the screen, and also saves
-a copy to a file in the local directory. Below the main graph is a 
-residuals graph, the difference between the data and the best fit line.
-
-There is also a function which will load data from a file. More convenient.
-The first line of the file is ignored (assuming it's the name of the variables).
-After that the data file needs to be formatted: 
-number space number space number space number newline
-Do NOT put commas in your data file!! You can use tabs instead of spaces.
-The data file should be in the same directory as this python file.
-The data should be in the order:
-x_data y_data x_uncertainty y_uncertainty
-"""
-
-
 import scipy.optimize as optimize
 import numpy as np
 import matplotlib.pyplot as plt
