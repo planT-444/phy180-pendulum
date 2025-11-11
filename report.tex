@@ -8,6 +8,7 @@
 \usepackage{siunitx}
 \usepackage{titlesec}
 \usepackage{hyperref}
+\usepackage{xcolor}
 \usepackage[labelfont=bf]{caption}
 
 \setlength{\textwidth}{6.5in}
@@ -98,7 +99,11 @@ Footage was collected starting at $\theta_{max} \approx 0.26$ (within the small-
 $Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. Selecting $n$ can be difficult because smaller $n$ can decrease $u(Q)$ but also result in a wider range of acceptable $K$ values (oscillations for which $\theta_{max}$ and $\theta_{final}$ agree within error), increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected.
 
 \subsection{Measuring Period vs. Pendulum Length}
-A higher contrast background and camera flash improved the string's visibility in the camera setup. After each change in the two-string pendulum's length, it was measured using a metre stick taped to the boards and the floor (changing viewing angles to confirm vertical alignment while holding the stick often shifted its position). The vertical distance between the centre of rotation and the pendulum's centre of mass is slightly above the ball's centre because of the screw and string, an error negligible compared to the slightly misaligned and warped metre stick. Thus, the radius of the ball was subtracted from the distance between the centre of rotation and the bottom of the ball. Eye level was held as closely to the metre stick and as horizontal as achievable to reduce parallax error in readings. 
+A higher contrast background and camera flash improved the string's visibility in the camera setup. After each change in the two-string pendulum's length, it was measured using a metre stick taped to the boards and the floor (changing viewing angles to confirm vertical alignment while holding the stick often shifted its position). The vertical distance between the centre of rotation and the pendulum's centre of mass is slightly above the ball's centre because of the screw and string, an error negligible compared to the slightly misaligned and warped metre stick. Thus, the radius of the ball was subtracted from the distance between the centre of rotation and the bottom of the ball. Eye level was held as closely to the metre stick and as horizontal as achievable to reduce parallax error in readings.
+The period starting from a small angle $theta_0<0.26$ was measured (in OSP Tracker) by dividing the time for 10 oscillations $10T$ by 10. With the small angle approximation, the change in period is negligible, averaging 10 oscillations reduces type B uncertainty. 
+
+\subsection{Measuring Q Factor vs. Length}
+The same footage (multiple minutes per video) for varying length was analyzed with manual tracking in OSP Tracker. The 
 
 
 \section{Results and Data Analysis}

@@ -21,8 +21,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import statistics
 from pathlib import Path
+from plot_fit import plot_fit
 
-def load_fit_exponential_amplitudes():
+def load_data_calculate_Qs():
     output = ""
     input_dir = Path(__file__).parent / "input-files"
     period_filename = input_dir / "PHY180 Pendulum - T vs L.csv"
@@ -46,8 +47,6 @@ def load_fit_exponential_amplitudes():
             period_b_uncertainty, 
             statistics.stdev(periods) / len(periods) ** 0.5
         ))
-    print(lengths)
-    print(mean_periods)
 
     lengths, mean_periods, period_error = zip(
         *sorted(
@@ -61,17 +60,12 @@ def load_fit_exponential_amplitudes():
     Qs = []
     Q_uncertainties = []
     for length_i, length in enumerate(sorted(lengths)):
-        if length * 100 == 42.1:
-            continue
         print(f"PHY180 Pendulum - L={length * 100:.1f}.csv")
         
         filename = input_dir / f"PHY180 Pendulum - L={length * 100:.1f}.csv"
         times, amplitudes = np.genfromtxt(filename, usecols=(3,4), skip_header=1, unpack = True, delimiter = ',')
         time_error = np.array([1/120] * len(times))
         amplitude_error = np.array([np.deg2rad(0.3)] * len(amplitudes))
-        if length == 0.365:
-            print(times)
-            print(amplitudes)
         popt, pcov = optimize.curve_fit(exponential, times, amplitudes, sigma=amplitude_error, p0=None, bounds = ([0,0], [np.inf, np.inf]), absolute_sigma=True)
         # The best fit values are popt[], while pcov[] tells us the uncertainties.
 
@@ -95,17 +89,53 @@ def load_fit_exponential_amplitudes():
         output += f"Q: {Qs[length_i]} +/- {Q_uncertainties[length_i]}\n"
         output += "\n"
         
-        
-        
     output_dir = Path(__file__).parent / "output-files"
         
     with open(output_dir / ("lengths and taus.txt"), 'w') as f:
         f.write("Best fit parameters, with uncertainties, but not rounded off properly:\n")
         f.write(output)
+    
+    return (
+        np.array(lengths), 
+        np.array(Qs), 
+        np.array([0.005] * len(lengths)), 
+        np.array(Q_uncertainties)
+    ) 
 
 def exponential(time, theta_0, tau):
     return theta_0 * np.exp(-time/tau)
 
+def quadratic(length, a, b, c):
+    return a * length ** 2 + b * length + c 
+
+def line(length, m, b):
+    return m * length + b
+
+def sqrt(length, a, b):
+    return a * length ** 0.5 + b
+
+def logarithm(length, a, b):
+    return a * np.log(length) + b
 
 if __name__ == '__main__':
-    load_fit_exponential_amplitudes()
+    plot_fit(line, *load_data_calculate_Qs(),
+        xaxis="Length", xunits="m",
+        yaxis="Q factor",
+        output_filename = "Q vs. length linear")
+    
+    plot_fit(quadratic, *load_data_calculate_Qs(),
+        xaxis="Length", xunits="m",
+        yaxis="Q factor",
+        output_filename = "Q vs. length quadratic")
+    
+    plot_fit(logarithm, *load_data_calculate_Qs(),
+        xaxis="Length", xunits="m",
+        yaxis="Q factor",
+        output_filename = "Q vs. length log")
+    
+    plot_fit(sqrt, *load_data_calculate_Qs(),
+        xaxis="Length", xunits="m",
+        yaxis="Q factor",
+        output_filename = "Q vs. length sqrt")
+
+    

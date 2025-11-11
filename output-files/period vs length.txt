@@ -1,3 +1,4 @@
 Best fit parameters, with uncertainties, but not rounded off properly:
 1.9974555061984014 +/- 0.0026210776346617245
 0.500457819403205 +/- 0.0011558285622399428
+R-squared: 0.9985452638524677
