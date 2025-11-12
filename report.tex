@@ -76,10 +76,14 @@ The experiments in this report:
 Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T(\theta_0)=T(-\theta_0)$). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally consistent with a constant small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ when $\abs{\theta_0}\leq0.25 \pm 3$. Subsequent experiments used starting amplitudes within the small-angle range. $Q_{\text{fit}}$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The decaying exponential fits $\theta_{\text{max}}$ well but initially underestimates, then overestimates its true value. Considering error, the calculated $Q_{\text{fit}}=149\pm 2$ agreed with the $Q_2=154 \pm 10$ and $Q_3=165 \pm 9$ found by counting the number of $T$ for $\theta$ to decay by a factors of $\e^{-\pi/2}$ and $\e^{-\pi/3}$ respectively. It was also determined that $T$ depends very strongly on $L$, that $T=2\sqrt{L}\cdot \si{s/m^{0.5}}$, agreeing with the predicted model with some modification to units. $Q$ was also determined to have a dependence on $L$, with $Q=kL^n$, $k=380\pm20$, $n=0.76 \pm 0.03$.
 
 \subsection{Overview of Software Use}
-Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker (Brown, 2025) to search the recorded footage. The data, formatted as .csv files, was passed into Python scripts customized from the one provided (Wilson, 2025b) that parsed data, performed calculations, and generated best fit data and graphs. See \href{https://github.com/planT-444/phy180-pendulum}{GitHub repository}.
+\vspace{-0.25cm}
+Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker (Brown, 2025) to search the recorded footage. The data, formatted as \texttt{.csv} files, was passed into 
+\href{https://github.com/planT-444/phy180-pendulum}{Python scripts} 
+customized from \texttt{fit\_black\_box.py} (Wilson, 2025b) that parsed data, performed calculations, and generated best fit data (with uncertainties) and graphs.
 
-
+\vspace{-0.25cm}
 \section{Methods and Procedures}
+\vspace{-0.25cm}
 {\color{darkGreen}
 The string was tied around a screw, which was inserted into the mass (a tennis ball). The polypropylene string had negligible strain caused by the weight of the mass. Two stacks of books stabilized two boards which jutted off the table and clamped the string, fixing the pivot. A tripod supported the camera (a phone) from a distance, capturing slow-motion footage.
 }
@@ -88,9 +92,11 @@ $m_{\text{ball}}\approx\SI{60}{g}$, $m_{\text{screw}}\approx\SI{1}{g}$, and the 
 }
 
 \subsection{Measuring Period vs. Initial Amplitude}
+\vspace{-0.25cm}
 {\color{darkGreen}
 The period was measured using frame-by-frame analysis of the footage in OSP Tracker, with 3 oscillations per trial to reduce type B uncertainty (after confirming that multiple oscillations did not significantly impact $T$, i.e. $Q\gg1$). A protractor taped to the end of the boards measured initial amplitudes ($\pm \pi/2$). When dropping the mass, it was ensured from another angle that the pendulum would swing on a plane perpendicular to the protractor. The string was clamped close to the protractor to prevent parallax in readings (see Figure~\ref{fig:setup1}).}
-{\color{darkPurple}The length $L=58.0\pm 0.5\,\text{cm}$ was used for all trials.}
+{\color{darkPurple}A longer length $L=58.0\pm 0.5\,\text{cm}$ was used for all trials, minimizing 
+$\frac{u_B(T)}{T}$ with higher $T$.}
 
 \begin{figure}[h]
     \centering
@@ -115,14 +121,13 @@ The period was measured using frame-by-frame analysis of the footage in OSP Trac
         \label{fig:tracker}
     \end{minipage}
 \end{figure}
-\vspace{-0.5cm}
 
 \subsection{Measuring Q Factor}
+\vspace{-0.25cm}
 {\color{darkGreen}
 Footage was collected starting at $\theta_{\text{max}} \approx 0.25$ (small angle). The mass was now hung from two strings of equal length to prevent drift normal to the desired plane of motion over many oscillations (see Figure~\ref{fig:setup2}). The lens of the phone camera was normal to said plane and level with the pivot to reduce parallax error, since max amplitude was now measured from the footage using OSP Tracker's built-in protractor (see Figure~\ref{fig:tracker}). $T_0$ and $T_{final}$ were also tracked for $Q$ calculations.} 
-{\color{darkPurple} The length $L=29.1 \pm 0.5\,\text{cm}$ was used.}
+{\color{darkPurple} The shorter length $L=29.1 \pm 0.5\,\text{cm}$ was used for shorter $T$, increasing $\frac{u(T)}{T}$. However, since $\frac{u(T)}{T}\ll\frac{u(\tau)}{\tau}$, shorter $L$ does not increase $u(Q)=Q\cdot\max(\frac{u(\tau)}{\tau}, \frac{u(T)}{T})$.}
 
-% TODO: rewrite
 {\color{darkPurple}
 When counting the number of oscillations $K$ for $\theta_{\text{max}}$ to decay to $\theta_{\text{final}}=\e^{-\pi/n}$, $u(\theta)$ causes $\theta_{\text{max}}$ at multiple oscillations to agree with $\theta_{\text{final}}$ within error, causing $u(K)$. $Q=nK$ (Equation~\ref{q counted}), so $u(Q)=nu(K)$. 
 Selecting $n$ is a tradeoff because smaller $n$ can decrease $u(Q)$ but also decreases $\theta_{\text{final}}$, increasing $u(K)$. Data from both $n=2$ and $n=3$ were collected.
@@ -165,8 +170,8 @@ $T$ was measured (in OSP Tracker) by dividing the time for 10 oscillations by 10
 
 \subsection{Measuring Q Factor vs. Length}
 $Q$ was founding using both $\tau$ and counting, but counting yielded extremely uncertain fit values because of high $u(K)\propto u(Q)$.
-The same footage (multiple minutes per video) for varying lengths was analyzed in OSP Tracker. Max amplitudes were manually tracked. To find the $\tau$ and $u(\tau)$, $\theta_{\text{max}}$ vs. $t$ data for each length was fitted to Equation \ref{max amplitude vs. time} with a \href{https://github.com/planT-444/phy180-pendulum/blob/master/yippee2.py}{Python script}, which also fitted the calculated $Q$ vs. $L$ data to various curves (see Appendix \ref{trying curves}).
-
+The same footage (multiple minutes per video) for varying lengths was analyzed in OSP Tracker. Max amplitudes were manually tracked. To find the $\tau$ and $u(\tau)$, $\theta_{\text{max}}$ vs. $t$ data for each length was fitted to Equation \ref{max amplitude vs. time} with a \href{https://github.com/planT-444/phy180-pendulum/blob/master/yippee2.py}{Python script}, which also calculated $Q$ with each $\tau$'s associated $T$ and fitted $Q$ vs. $L$ data to various curves (see Appendix \ref{trying curves}).
+\vspace{-0.3cm}
 
 \section{Results and Data Analysis}
 \vspace{-0.4cm}
@@ -285,6 +290,9 @@ As predicted, the exponent $n$ agrees with 0.5 within error. The coefficient $k$
         \label{fig:Q vs length}
 \end{figure}
 \vspace{-0.5cm}
+
+$u(\theta_{\text{max}})=\SI{0.3}{\degree}=\SI{0.005}{rad}$ (larger than in the $Q_{\text{fit}}$ section because some shorter $L$ means larger string thickness to protractor tick width ratio). $u(t)=\SI{0.008}{s}$ (120 FPS). Fitting $\theta_{\text{max}}$ vs. $t$ to Equation \ref{max amplitude vs. time} yielded $\tau \in [20.2,79$], $u(\tau)\in [0.6,3]$. $u(T)$ is the identical as in the $T$ vs. $L$ section. $u(Q)=Q\cdot\max(\frac{u(\tau)}{\tau},\frac{u(T)}{T})\in(2,7)$ and $u(L)=\SI{0.005}{m}$ (same reasoning as in the  $T$ vs. $L$ section) were used in the fit mentioned in Figure \ref{fig:Q vs length}.
+
 The fit values are both an order of magnitude greater than their uncertainties and do not agree with 0 within error. The residuals show that most error bars overlap the curve. Therefore, Q has a dependence on L that strongly resembles the power law function mentioned in Figure \ref{fig:Q vs length}.
 
 \section{Conclusion}
