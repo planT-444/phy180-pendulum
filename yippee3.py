@@ -16,6 +16,7 @@ def load_period_vs_length(filename):
     length_error = []
     mean_periods = []
     period_error = []
+    period_a_uncertainty = []
     period_b_uncertainty = 0.0008 # 120 fps, 10 oscillations
     for length, periods in filtered_periods.items():
         lengths.append(length)
@@ -25,10 +26,9 @@ def load_period_vs_length(filename):
             period_b_uncertainty, 
             statistics.stdev(periods) / len(periods) ** 0.5
         ))
-        print(period_b_uncertainty, 
+        period_a_uncertainty.append( 
             statistics.stdev(periods) / len(periods) ** 0.5)
-    print(period_error)
-    print(mean_periods)
+    print(sorted(period_a_uncertainty))
     return (
         (
             np.array(lengths), 
@@ -61,7 +61,6 @@ if __name__ == '__main__':
         figsize = (12, 9),
         font_size=35
     )
-    print(tvsl_logged_data)
     plot_fit(line, 
         *tvsl_logged_data,
         xaxis="ln(Length (m))",

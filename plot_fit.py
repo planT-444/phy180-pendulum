@@ -37,6 +37,10 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
     
+    if logged:
+        yerror = 0 * yerror
+        xerror = 0 * xerror
+    
     ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="black")
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.

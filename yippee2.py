@@ -99,25 +99,34 @@ def sqrt(length, a, b):
 def logarithm(length, a, b):
     return a * np.log(length) + b
 
+def power_law(length, k, n):
+    return k * length ** n
+
 if __name__ == '__main__':
-    plot_fit(line, *load_data_calculate_Qs(),
+    data = load_data_calculate_Qs()
+    plot_fit(line, *data,
         xaxis="Length", xunits="m",
         yaxis="Q factor",
         output_filename = "Q vs. length linear")
     
-    plot_fit(quadratic, *load_data_calculate_Qs(),
+    plot_fit(quadratic, *data,
         xaxis="Length", xunits="m",
         yaxis="Q factor",
         output_filename = "Q vs. length quadratic")
     
-    plot_fit(logarithm, *load_data_calculate_Qs(),
+    plot_fit(logarithm, *data,
         xaxis="Length", xunits="m",
         yaxis="Q factor",
         output_filename = "Q vs. length log")
     
-    plot_fit(sqrt, *load_data_calculate_Qs(),
+    plot_fit(sqrt, *data,
         xaxis="Length", xunits="m",
         yaxis="Q factor",
         output_filename = "Q vs. length sqrt")
+    
+    plot_fit(power_law, *data,
+        xaxis="Length", xunits="m",
+        yaxis="Q factor",
+        output_filename = "Q vs. length power law")
 
     
