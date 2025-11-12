@@ -8,14 +8,14 @@ import statistics
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
              xaxis="", yaxis="", xunits="", yunits="",
              output_filename = "graph.png",
-             logged=False
+             logged=False,
+             figsize = (18, 9)
              ):    
-    print(ydata)
     plt.rcParams.update({'font.size': font_size})
-    plt.rcParams['figure.figsize'] = 18, 9
+    plt.rcParams['figure.figsize'] = figsize
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
-               
+    
     popt, pcov = optimize.curve_fit(my_func, xdata, ydata, sigma=yerror, p0=init_guess, absolute_sigma=True)
     # The best fit values are popt[], while pcov[] tells us the uncertainties.
 
@@ -55,11 +55,6 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     ax1.set_xlabel(f"{xaxis} {xunits}")
     ax1.set_ylabel(f"{yaxis} {yunits}")
     # label the axes and set a title
-
-    if logged:
-        ax1.set_yscale('log')
-        ax1.set_xscale('log')
-    # uncomment out the above two lines if you want to make it log-log scale
     
     residual = ydata - my_func(xdata, *popt)
     ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
@@ -88,11 +83,3 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
         f.write(f"R-squared: {r_2}")
     
     fig.savefig(output_dir / (output_filename + ".png"))
-    # Show the graph on your screen.
-
-    
-    # This saves the graph as a file, which will get overwritten
-    # every time you run this program, so rename the file if you
-    # want to keep multiple files!
-
-    return None

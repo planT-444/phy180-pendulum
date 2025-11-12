@@ -30,27 +30,40 @@ def load_period_vs_length(filename):
     print(period_error)
     print(mean_periods)
     return (
-        np.array(lengths), 
-        np.array(mean_periods), 
-        np.array(length_error), 
-        np.array(period_error)
+        (
+            np.array(lengths), 
+            np.array(mean_periods), 
+            np.array(length_error), 
+            np.array(period_error)
+        ),
+        (
+            np.log(np.array(lengths)), 
+            np.log(np.array(mean_periods)),
+            np.array([1e-9] * len(lengths)),
+            np.array([1e-9] * len(lengths))
+        )
     )
     
 def power_series(L, k, n):
     return k * L ** n
 
+def line(logL, a, n):
+    return np.log(a) + n * logL
+
 input_dir = Path(__file__).parent / "input-files"
 if __name__ == '__main__':
-    tvsl_data = load_period_vs_length(input_dir / "PHY180 Pendulum - T vs L.csv")
+    tvsl_data, tvsl_logged_data = load_period_vs_length(input_dir / "PHY180 Pendulum - T vs L.csv")
     plot_fit(power_series, 
-             *tvsl_data,
-             xaxis="Length", xunits="m",
-             yaxis="Period", yunits="s",
-             output_filename = "period vs length")
-    plot_fit(power_series, 
-             *tvsl_data,
-             xaxis="Length", xunits="m",
-             yaxis="Period", yunits="s",
-             output_filename = "period vs length logged",
-             logged=True)
+        *tvsl_data,
+        xaxis="Length", xunits="m",
+        yaxis="Period", yunits="s",
+        output_filename = "period vs length"
+    )
+    print(tvsl_logged_data)
+    plot_fit(line, 
+        *tvsl_logged_data,
+        xaxis="Length", xunits="m",
+        yaxis="Period", yunits="s",
+        output_filename = "period vs length logged",
+    )
     

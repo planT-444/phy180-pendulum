@@ -20,6 +20,7 @@ def load_period_vs_amplitude(filename):
     mean_periods = []
     period_error = []
     period_b_uncertainty = 3e-3 # 120 fps, 3 oscillations: 1/120/3 = 2.78e-3 ~ 3e-3
+    period_a_uncertainty = []
     for amplitude, periods in filtered_periods.items():
         amplitudes.append(amplitude)
         amplitude_error.append(np.deg2rad(0.5))
@@ -28,9 +29,9 @@ def load_period_vs_amplitude(filename):
             period_b_uncertainty, 
             statistics.stdev(periods) / len(periods) ** 0.5
         ))
-        print(period_b_uncertainty, 
+        period_a_uncertainty.append( 
             statistics.stdev(periods) / len(periods) ** 0.5)
-    print(period_error)
+    print(sorted(period_a_uncertainty))
     return np.array(amplitudes), np.array(mean_periods), np.array(amplitude_error), np.array(period_error)
 
 
