@@ -39,8 +39,8 @@ def load_period_vs_length(filename):
         (
             np.log(np.array(lengths)), 
             np.log(np.array(mean_periods)),
-            np.array([1e-9] * len(lengths)),
-            np.array([1e-9] * len(lengths))
+            np.array(length_error) / np.array(lengths),
+            np.array(period_error) / np.array(mean_periods)
         )
     )
     
@@ -57,13 +57,18 @@ if __name__ == '__main__':
         *tvsl_data,
         xaxis="Length", xunits="m",
         yaxis="Period", yunits="s",
-        output_filename = "period vs length"
+        output_filename = "period vs length",
+        figsize = (12, 9),
+        font_size=35
     )
     print(tvsl_logged_data)
     plot_fit(line, 
         *tvsl_logged_data,
-        xaxis="Length", xunits="m",
-        yaxis="Period", yunits="s",
+        xaxis="ln(Length (m))",
+        yaxis="ln(Period (s))",
         output_filename = "period vs length logged",
+        figsize = (12, 9),
+        logged = True,
+        font_size=35
     )
     

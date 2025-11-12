@@ -5,7 +5,7 @@ from pathlib import Path
 import statistics
 
 
-def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=30,
+def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=35,
              xaxis="", yaxis="", xunits="", yunits="",
              output_filename = "graph.png",
              logged=False,
@@ -29,8 +29,10 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     # (x,y) = (xs,curve) is the line of best fit for the data in (xdata,ydata).
     # It has 1000 points to make it look smooth.
     # Note: the "*" tells Python to send all the popt values in a readable way.
-    
-    fig, (ax1,ax2) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [2, 1]})
+    if logged:
+        fig, ax1 = plt.subplots()
+    else:
+        fig, (ax1,ax2) = plt.subplots(2, 1, gridspec_kw={'height_ratios': [2, 1]})
     # Make 2 graphs above/below each other: ax1 is top, ax2 is bottom.
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
@@ -56,17 +58,18 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     ax1.set_ylabel(f"{yaxis} {yunits}")
     # label the axes and set a title
     
-    residual = ydata - my_func(xdata, *popt)
-    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
-    # Plot the residuals with error bars.
-    
-    ax2.axhline(y=0, color="black")    
-    # Plot the y=0 line for context.
-    
-    ax2.set_xlabel(f"{xaxis} {xunits}")
-    ax2.set_ylabel(f"Residuals {yunits}")
-    # ax2.set_title("Residuals of the fit")
-    # Here is where you change how your graph is labelled.
+    if not logged:
+        residual = ydata - my_func(xdata, *popt)
+        ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
+        # Plot the residuals with error bars.
+        
+        ax2.axhline(y=0, color="black")    
+        # Plot the y=0 line for context.
+        
+        ax2.set_xlabel(f"{xaxis} {xunits}")
+        ax2.set_ylabel(f"Residuals {yunits}")
+        # ax2.set_title("Residuals of the fit")
+        # Here is where you change how your graph is labelled.
 
     fig.tight_layout()
     # Does a decent cropping job of the two figures.

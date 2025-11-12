@@ -156,7 +156,7 @@ The same footage (multiple minutes per video) for varying length was analyzed in
 \section{Results and Data Analysis}
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.28\textheight]{output-files/period vs amplitude.png}
+    \includegraphics[height=0.22\textheight]{output-files/period vs amplitude.png}
     \caption{
         {\color{darkPurple}
         Graph of $T$ vs. $\theta_0$ at release fitted to Equation~\ref{power series}, the 3-term power series 
@@ -201,7 +201,7 @@ Therefore, the small angle approximation is valid for $\abs{\theta_0}\leq 0.25 \
 }
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.28\textheight]{output-files/amplitude vs. time.png}
+    \includegraphics[height=0.22\textheight]{output-files/amplitude vs. time.png}
     \caption{
         {\color{darkPurple}
         Graph of the decaying $\theta_{\text{max}}$ vs. time fitted to the exponential
@@ -231,20 +231,9 @@ $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_
 }
 % RN
 \begin{figure}[H]
-    \centering
-    \includegraphics[height=0.28\textheight]{output-files/period vs length.png}
-    \caption{
-        Graph of $T$ vs. $L$ fitted to $T=kL^n$, yielding $k=1.997\pm \SI{0.003}{s/m^{0.5}}$, 
-        $n=0.500 \pm 0.001$.
-    }
-    \label{fig:period vs length}
-\end{figure}
-\vspace{-0.5cm}
-
-\begin{figure}[h]
-    \begin{minipage}[t]{0.28\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[height=0.28\textheight]{output-files/period vs length.png}
+        \includegraphics[width=1\textwidth]{output-files/period vs length.png}
         \caption{
             Graph of $T$ vs. $L$ fitted to $T=kL^n$, yielding $k=1.997\pm \SI{0.003}{s/m^{0.5}}$, 
             $n=0.500 \pm 0.001$. 
@@ -252,18 +241,25 @@ $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_
         \label{fig:period vs length}
     \end{minipage}
     \hfill
-    \begin{minipage}[t]{0.28\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[height=0.28\textheight]{output-files/period vs length.png}
+        \includegraphics[width=1\textwidth]{output-files/period vs length logged.png}
         \caption{
-            Graph of $Q$ vs. $L$ fitted to the equation $Q=A \sqrt{L} + B$, yielding $A=400 \pm \SI{20}{m^{-0.5}}$, $B=-67 \pm 7$. For $L< \SI{3}{cm},\:Q<0$, which is impossible. However, $r_{\text{ball}}\approx \SI{3}{cm}$, so $L<\SI{3}{cm}$ represents cases with no string, and thus, no pendulum.
+            Graph of $\ln T$ vs. $\ln L$ fitted to the line $\ln T = \ln k + n\ln L$, 
+            yielding $k=1.997\pm \SI{0.003}{s/m^{0.5}}$, 
+            $n=0.500 \pm 0.001$. As expected, the fit values are the same. 
         }
-        \label{fig:Q vs length}
+        \label{fig:period vs length logged}
     \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
-    
+    \centering
+        \includegraphics[height=0.22\textheight]{output-files/Q vs. length sqrt.png}
+        \caption{
+            Graph of $Q$ vs. $L$ fitted to the equation $Q=A \sqrt{L} + B$, yielding $A=400 \pm \SI{20}{m^{-0.5}}$, $B=-67 \pm 7$. For $L< \SI{3}{cm},\:Q<0$, which is impossible. However, $r_{\text{ball}}\approx \SI{3}{cm}$, so $L<\SI{3}{cm}$ represents cases with no string, and thus, no pendulum.
+        }
+        \label{fig:Q vs length}
 \end{figure}
 \vspace{-0.5cm}
 
