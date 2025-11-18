@@ -90,3 +90,6 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
         f.write(f"R-squared: {r_2}")
     
     fig.savefig(output_dir / (output_filename + ".png"))
+
+
+# test!!!
