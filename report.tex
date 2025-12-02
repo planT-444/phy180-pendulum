@@ -46,40 +46,60 @@
 \vspace{-5ex}
 
 \section{Introduction}
-The objective of this project was to determine the accuracy of predictions by the \textbf{damped harmonic oscillator} model of a pendulum (Wilson, 2025a) and which variables depend on each other through various experiments.
+This lab report presents results of experiments that examined predictions and determined variable dependencies of the \textbf{damped harmonic oscillator} model of a pendulum. The equation
+\begin{equation}
+    \theta(t)=\theta_0 ~ \e^{-t/\tau} \cos{\left(\frac{2\pi}{T}t+\phi_0 \right)} 
+        \label{amplitude vs. time}
+\end{equation}
+simultaneously describes the exponentially decaying amplitude of oscillation and its periodic nature [1]. 
+% EXPERIMENT T
+Experiment 1 examined Wilson's prediction that \textbf{period vs. initial amplitude} data, when fitted to the equation
+\begin{equation}
+    T(\theta_0)=T_0(1 + B\theta_0 + C\theta_0^2) \label{power series}
+\end{equation}
+would yield constant $T=T_0$, i.e. $B=0,\:C=0$. That is, $T$ is independent of $\theta_0$.
+Analysis of this collected data showed that $B=0$ (symmetric pendulum) but that a non-zero $C$ causes $T$ to increase quadratically with $|\theta_0|$. For $\abs{\theta_0}\leq0.25 \pm 0.03$, $T$ could reasonably be considered constant (agreeing with $T_0$ within error). This \textbf{small angle approximation} was used in all subsequent experiments. Note that two values $a \pm u(a)$, $b \pm u(b)$ (where $a<b$) \textbf{agree within error} if their error bars overlap ($a + u(a) \geq b - u(b))$. In the special case where $u(a)=u(b)$, $a$ and $b$ agree within error if $\abs{b-a}\leq 2u(a).$
 
-\subsection{Background}
-The following equations may be referenced throughout the report:
-\begin{align}
-    \theta(t)&=\theta_0 ~ \e^{-t/\tau} \cos{\left(\frac{2\pi}{T}t+\phi_0 \right)} 
-        \label{amplitude vs. time}\\
-    \theta_{\text{max}}(t)&=\theta_0 ~ \e^{-t/\tau} \label{max amplitude vs. time}\\
-    T(\theta_0) &= T_0(1 + B\theta_0 + C\theta_0^2) \label{power series}\\
-    Q&=\pi\frac{\tau}{T} \label{q calculated}\\ 
-    Q&=nK \label{q counted}\\
-    T&=kL^n \label{period vs length power law}
-\end{align}
-The damped harmonic oscillator model suggests that Equation~\ref{amplitude vs. time} (Wilson, 2025a) can describe the position of an oscillating pendulum released at rest from an initial amplitude $\theta_0$ as a function of time, where Equation \ref{max amplitude vs. time} describes the maximum amplitude per oscillation. The model predicts that $T$ does not depend on $\theta_0$ at all, that the best fit 3-term power series Equation \ref{power series} (Wilson) would yield $B,~ C=0$ and $T=T_0$. 
-Equation \ref{q calculated} (Wilson) quantifies $Q$ in terms of the decay constant $\tau$ and $T$. By Equation~\ref{q counted}, $Q$ can also be found by counting $K$, the number of oscillations for $\theta$ to decay by a factor of $\e^{-\pi/n}$ for any $n$.
-The best-fit power law Equation \ref{period vs length power law} (Wilson) is predicted to yield $k=2$, $n=0.5$, i.e. $T=2\sqrt{L}$ (Wilson) with modified units.
+% EXPERIMENT 2
+Experiment 2 measured the pendulum's decaying \textbf{peak amplitude vs. time}, modelled by
+\begin{equation}
+    \theta_{\text{max}}(t)=\theta_0 ~ \e^{-t/\tau} \label{max amplitude vs. time}
+\end{equation}
+and obtained values for the \textbf{Q factor}, defined as
+\begin{equation}
+    Q=\pi\frac{\tau}{T} \label{q calculated}
+\end{equation}
+which quantifies the decay constant $\tau$ in proportion to $T$ (Wilson).
+$Q$ was also obtained by counting,
+\begin{equation}
+    Q=nK \label{q counted}
+\end{equation}
+where $K$ is the number of oscillations for $\theta_{\text{max}}$ to decay by a factor of $\e^{-\pi/n}$ for a chosen $n$. 
+Equation \ref{amplitude vs. time} fits the collected $\theta_{\text{max}}$ vs. $t$ data well but initially underestimates, then overestimates its true value. Considering error, the calculated $Q_{\text{fit}}=149\pm 2$ agreed with the $Q_2=154 \pm 10$ and $Q_3=165 \pm 9$ obtained by counting for $n=2$ and 3 respectively.
 
-When analyzing uncertainties, two values $a \pm u(a),~b \pm u(b)$ (where $a<b$) are considered experimentally indistinguishable if their error bars overlap ($a + u(a) \geq b - u(b))$. In the special case where $u(a)=u(b)$, $a$ and $b$ agree within error if $\abs{b-a}\leq 2u(a).$
+% EXPERIMENT 3
+Experiment 3 examined Wilson's prediction that fitting \textbf{period vs. length} to the equation
+\begin{equation}
+    T=kL^n \label{period vs length power law}
+\end{equation}
+would yield $k=2$, $n=0.5$, i.e. 
+\begin{equation}
+    T=2\sqrt{L}
+\end{equation}
+Collected data yielded fit values agreeing strongly with the predictions within error, but the units are incorrect. The theoretically derived equation
+\begin{equation}
+    T=2\pi\sqrt{\frac{L}{g}} \label{period vs length}
+\end{equation}
+has correct units [2] and $k=\frac{2\pi}{\sqrt{g}}$ agrees with $k=2$ within Experiment 3's maximum precision.
 
-\subsection{Experimental Objectives and Findings}
-The experiments in this report:
-\begin{itemize}
-    \item Examined how a pendulum's initial amplitude $\theta_0$ affects its period $T$,
-    \item Measured the $Q$ factor, which represents how slowly the amplitude $\theta$ decays per $T$,
-    \item Examined how a pendulum's length affects its period $T$, and
-    \item Examined how a pendulum's length affects its $Q$ factor.
-\end{itemize}
-Analysis of the collected data and its uncertainties yielded several results. The pendulum was confirmed to be symmetric ($T(\theta_0)=T(-\theta_0)$). $T$ increases quadratically with $\theta_0$, but after considering uncertainty, it is experimentally consistent with a constant small-angle period $T_0=1.528 \pm \SI{0.002}{s}$ when $\abs{\theta_0}\leq0.25 \pm 3$. Subsequent experiments used starting amplitudes within the small-angle range. $Q_{\text{fit}}$ was calculated from the experimentally determined exponential decay constant $\tau$ and period $T$. The decaying exponential fits $\theta_{\text{max}}$ well but initially underestimates, then overestimates its true value. Considering error, the calculated $Q_{\text{fit}}=149\pm 2$ agreed with the $Q_2=154 \pm 10$ and $Q_3=165 \pm 9$ found by counting the number of $T$ for $\theta$ to decay by a factors of $\e^{-\pi/2}$ and $\e^{-\pi/3}$ respectively. It was also determined that $T$ depends very strongly on $L$, that $T=2\sqrt{L}\cdot \si{s/m^{0.5}}$, agreeing with the predicted model with some modification to units. $Q$ was also determined to have a dependence on $L$, with $Q=kL^n$, $k=380\pm\SI{20}{m^{-0.76}}$, $n=0.76 \pm 0.03$.
 
-\subsection{Overview of Software Use}
-\vspace{-0.25cm}
-Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker (Brown, 2025) to search the recorded footage. The data, formatted as \texttt{.csv} files, was passed into 
+
+% EXPERIMENT 4
+Experiment 4 examined the dependency of \textbf{$Q$ factor vs. length}, measuring $Q$ values with the same method as experiment 2. After fitting the data to many curves (Appendix \ref{trying curves}), $Q=kL^n$ yielded reasonable fit uncertainties and residuals, $k=380\pm\SI{20}{m^{-0.76}}$, $n=0.76 \pm 0.03$.
+
+Once the pendulum was built, most data collection used the Open Source Physics (OSP) Tracker [3] to search the recorded footage. The data, formatted as \texttt{.csv} files, was passed into 
 \href{https://github.com/planT-444/phy180-pendulum}{Python scripts} 
-customized from \texttt{fit\_black\_box.py} (Wilson, 2025b) that parsed data, performed calculations, and generated best fit data (with uncertainties) and graphs.
+customized from \texttt{fit\_black\_box.py} [4] that parsed data, performed calculations, and generated best fit data (with uncertainties) and graphs.
 
 \vspace{-0.25cm}
 \section{Methods and Procedures}
@@ -238,7 +258,7 @@ $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_
         \includegraphics[width=1\textwidth]{output-files/period vs length.png}
         \caption{
             Graph of $T$ vs. $L$ fitted to $T=kL^n$, yielding $k=1.997\pm \SI{0.003}{s/m^{0.5}}$, 
-            $n=0.500 \pm 0.001$. No error bars overlap the curve.
+            $n=0.500 \pm 0.001$. No error bars overlap the fitted curve, so $u(T)$ was likely underestimated.
         }
         \label{fig:period vs length}
     \end{minipage}
@@ -249,13 +269,13 @@ $Q_2$ experimentally agrees fully with $Q_{fit}$ ($\,\abs{Q_{fit}-Q_2} \leq u(Q_
         \caption{
             Graph of $\ln T$ vs. $\ln L$ fitted to the line $\ln T = \ln k + n\ln L$, 
             yielding the same fit values $k=1.997\pm \SI{0.003}{s/m^{0.5}}$, 
-            $n=0.500 \pm 0.001$. No error bars overlap the curve.
+            $n=0.500 \pm 0.001$. No error bars overlap the fitted curve, so $u(T)$ was likely underestimated.
         }
         \label{fig:period vs length logged}
     \end{minipage}
 \end{figure}
 
-As in the $T$ vs. $\theta_0$ analysis, $u(T)=\max(u_A(T), u_B(T))$ where $u_A(T)=$ standard error of the mean of 3 trials, ranging from $0.0006$ to $0.002\,$s, and $u_B(T)=1/\SI{120}{FPS}/\SI{10}{oscillations}=\SI{0.0008}{s}$. A combination of the metre stick's slight curve, its slight misalignment from the vertical, and parallax error cause at best $u(L)=\SI{0.005}{m}$. No error bars overlap the fitted curve in Figures \ref{fig:period vs length} and \ref{fig:period vs length logged}, so $u(T)$ was likely underestimated.
+As in the $T$ vs. $\theta_0$ analysis, $u(T)=\max(u_A(T), u_B(T))$ where $u_A(T)=$ standard error of the mean of 3 trials, ranging from $0.0006$ to $0.002\,$s, and $u_B(T)=1/\SI{120}{FPS}/\SI{10}{oscillations}=\SI{0.0008}{s}$. A combination of the metre stick's slight curve, its slight misalignment from the vertical, and parallax error cause at best $u(L)=\SI{0.005}{m}$.
 
 As predicted, the exponent $n$ agrees with 0.5 within error. The coefficient $k$ agrees with the predicted 2.000 within error, but the units should be in $\si{s/m^{0.5}}$. Therefore, the data agrees with the model, but its units must be changed: $T=2\sqrt{L}\cdot\si{s/m^{0.5}}$ if $[T]=\si{s}$ and $[L]=\si{m}$.
 
@@ -341,16 +361,22 @@ Generative AI (ChatGPT) queried for basic questions about matplotlib, for held d
 
 \pagebreak
 \section{References}
+    \noindent 
+    [1] B. Wilson, "PHY180 Pendulum Project (2025).
+    Downloaded from Quercus, 2025
+    
     \hangindent=2em
-    \noindent Brown, Douglas. \emph{Tracker Video Analysis and Modeling Tool},  
-        Open Source Physics, Version 6.3.2, 2025.
-        \url{https://physlets.org/tracker/}
-
-    Wilson, Brian. \emph{PHY180 Pendulum Project (2025)}.
-        Downloaded from Quercus, 2025a.
-
-    Wilson, Brian. \emph{fit\_black\_box.py}.
-        Downloaded from Quercus, 2025b.
+    [2] D. Russel, "Oscillation of a "Simple" Pendulum". Pennsylvania State University,
+        2018.
+        \url{https://www.acs.psu.edu/drussell/Demos/Pendulum/Pendulum.html}
+    
+    \hangindent=2em
+    [3] D. Brown, "Tracker Video Analysis and Modeling Tool",  
+    Open Source Physics, Version 6.3.2, 2025.
+    \url{https://physlets.org/tracker/}
+    
+    [4] B. Wilson, "fit\_black\_box.py".
+    Downloaded from Quercus, 2025
 
 
 \end{document}
