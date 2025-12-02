@@ -61,10 +61,10 @@ if __name__ == '__main__':
         figsize = (12, 9),
         font_size=35
     )
-    plot_fit(line, 
-        *tvsl_logged_data,
-        xaxis="ln(Length (m))",
-        yaxis="ln(Period (s))",
+    plot_fit(power_series, 
+        *tvsl_data,
+        xaxis="Length", xunits="m",
+        yaxis="Period", yunits="s",
         output_filename = "period vs length logged",
         figsize = (12, 9),
         logged = True,
