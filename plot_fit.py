@@ -2,8 +2,6 @@ import scipy.optimize as optimize
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
-import statistics
-
 
 def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, font_size=35,
              xaxis="", yaxis="", xunits="", yunits="",
