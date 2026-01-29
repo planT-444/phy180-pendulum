@@ -70,4 +70,3 @@ if __name__ == '__main__':
         logged = True,
         font_size=35
     )
-    

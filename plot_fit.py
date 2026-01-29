@@ -89,3 +89,4 @@ def plot_fit(my_func, xdata, ydata, xerror=None, yerror=None, init_guess=None, f
     
     fig.savefig(output_dir / (output_filename + ".png"))
 
+

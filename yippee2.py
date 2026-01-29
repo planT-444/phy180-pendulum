@@ -128,5 +128,4 @@ if __name__ == '__main__':
         xaxis="Length", xunits="m",
         yaxis="Q factor",
         output_filename = "Q vs. length power law")
-
-    
+  
